@@ -1,9 +1,10 @@
-import './App.css';
+import "./App.css";
+import Header from "./components/Header.js/Header";
 
 function App() {
   return (
-    <div className="App">
-      <h1 className="bg-secondary text-7xl">Hello world!</h1>
+    <div className="select-none">
+      <Header />
     </div>
   );
 }
