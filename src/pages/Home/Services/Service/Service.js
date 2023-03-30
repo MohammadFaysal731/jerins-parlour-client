@@ -1,4 +1,5 @@
 import React from 'react';
+import PrimaryButton from '../../../../components/PrimaryButton/PrimaryButton';
 
 const Service = ({ service }) => {
   const {title,description,price,image}=service;
@@ -12,7 +13,7 @@ const Service = ({ service }) => {
         <h4 className="text-xl font-semibold">$ {price} /-</h4>
         <blockquote>{description}</blockquote>
         <div className="card-actions">
-          <button className="btn btn-primary text-white">Buy Now</button>
+          <PrimaryButton>Buy Now</PrimaryButton>
         </div>
       </div>
     </div>

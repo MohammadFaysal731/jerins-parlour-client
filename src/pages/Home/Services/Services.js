@@ -1,5 +1,6 @@
 import React from "react";
-import Service from "./Service";
+import PrimaryButton from "../../../components/PrimaryButton/PrimaryButton";
+import Service from "./Service/Service";
 import { servicesData } from "./ServicesData";
 const Services = () => {
   return (
@@ -14,7 +15,7 @@ const Services = () => {
           ))}
         </div>
         <div className="text-center m-5">
-          <button className="btn btn-primary">Explore more</button>
+          <PrimaryButton>Explore more</PrimaryButton>
         </div>
       </div>
     </div>
