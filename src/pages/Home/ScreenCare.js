@@ -2,7 +2,7 @@ import React from 'react';
 import screenCareImage from "../../assets/images/engin-akyurt-g-m8EDc4X6Q-unsplash 1.png";
 const ScreenCare = () => {
   return (
-    <div className="bg-secondary p-5 m-5">
+    <div className="bg-secondary p-14 mt-5">
       <div className="max-w-7xl mx-auto p-3 grid grid-cols-1 md:grid-cols-2 gap-4 place-items-center ">
         {/* banner left  */}
         <div className="">
@@ -21,12 +21,12 @@ const ScreenCare = () => {
             {/* happy customer  */}
             <div className="">
               <span className="text-primary font-bold text-5xl">500 +</span>
-              <h4 className="font-semibold">Happy Customer</h4>
+              <h4 className="font-semibold mt-3">Happy Customer</h4>
             </div>
             {/* total service */}
             <div className="">
               <span className="text-primary font-bold text-5xl">16 +</span>
-              <h4 className="font-semibold">Total Service</h4>
+              <h4 className="font-semibold mt-3">Total Service</h4>
             </div>
           </div>
         </div>
