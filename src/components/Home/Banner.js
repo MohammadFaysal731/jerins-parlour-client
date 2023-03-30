@@ -2,7 +2,7 @@ import React from 'react';
 import bannerRight from "../../assets/images/beautiful-young-asian-woman-touching-her-clean-face-with-fresh-healthy-skin-isolated-white-wall-beauty-cosmetics-facial-treatment-concept 1.png";
 const Banner = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 place-items-center">
+    <div className="grid grid-cols-1 md:grid-cols-2 place-items-center bg-secondary">
       {/* banner left  start*/}
       <div className="mb-5">
         <h1 className="text-2xl lg:text-5xl font-bold mb-2 lg:mb-5">
@@ -18,7 +18,7 @@ const Banner = () => {
       </div>
       {/* banner left end */}
       {/* banner right start */}
-      <div className="w-96 lg:w-full">
+      <div className="w-96 ">
         <img src={bannerRight} alt="" />
       </div>
       {/* banner right end  */}

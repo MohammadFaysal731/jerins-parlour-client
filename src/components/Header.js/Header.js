@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import logo from "../../assets/icons/logo.png";
-import Banner from './Banner';
 const Header = () => {
   const [open,setOpen]=useState(false);
   const menuItems = (
@@ -52,12 +51,13 @@ const Header = () => {
         {/* mobile navbar items  */}
         <ul
           className={`lg:hidden p-5  ${
-            open ? "max-h-auto" : "max-h-0 overflow-hidden"
+            open
+              ? "max-h-auto"
+              : "max-h-0 overflow-hidden"
           }`}
         >
           {menuItems}
         </ul>
-       <Banner/>
       </div>
     </nav>
   );
