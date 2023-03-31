@@ -15,6 +15,7 @@ export const servicesData = [
       "The Color Styling Mousse is a coloring foam with nourishing ingredients. Your hair gets light color effects and at the same time the mousse serves as a styling aid. The color will last until the next hair wash, possibly longer. Your hair is protected during blow drying and it does not dry out.",
     price: 99,
     image: services2,
+    shadow:"shadow-2xl"
   },
   {
     title: "Skin Care Treatment",

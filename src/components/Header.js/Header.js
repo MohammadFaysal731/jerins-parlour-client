@@ -1,16 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { NavLink } from "react-router-dom";
 import logo from "../../assets/icons/logo.png";
+import { headerData } from "./HeaderData";
 const Header = () => {
-  const [open,setOpen]=useState(false);
+  const [open, setOpen] = useState(false);
   const menuItems = (
     <>
-      <li className="py-4 lg:mx-4 text-md lg:text-xl font-semibold">Home</li>
-      <li className="py-4 lg:mx-4 text-md lg:text-xl font-semibold">Review</li>
-      <li className="py-4 lg:mx-4 text-md lg:text-xl font-semibold">Review</li>
-      <li className="py-4 lg:mx-4 text-md lg:text-xl font-semibold">About</li>
-      <li className="py-4 lg:mx-4 text-md lg:text-xl font-semibold">Contact Us</li>
-      <li className="py-4 lg:mx-4 text-md lg:text-xl font-semibold">Sign in</li>
+      {headerData?.map(({ text, path }, index) => (
+        <li
+          className="py-4 lg:mx-4 text-sm lg:text-xl font-semibold"
+          key={index}
+        >
+          <NavLink
+            to={path}
+            style={({ isActive }) => {
+              return {
+                color: isActive ? "text-primary" : "black",
+              };
+            }}
+          >
+            {text}
+          </NavLink>
+        </li>
+      ))}
     </>
   );
   return (
@@ -28,20 +41,23 @@ const Header = () => {
               onClick={() => setOpen(!open)}
               className="btn btn-square btn-ghost"
             >
-              {open ? <AiOutlineClose className=" w-8 h-8" />:<svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                className="inline-block w-8 h-8 stroke-current"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              </svg>}
-             
+              {open ? (
+                <AiOutlineClose className=" w-8 h-8" />
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  className="inline-block w-8 h-8 stroke-current"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  ></path>
+                </svg>
+              )}
             </button>
           </div>
           {/* navbar logo and mobile navbar icon end */}

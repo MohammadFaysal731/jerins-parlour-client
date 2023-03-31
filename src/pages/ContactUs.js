@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
+import PrimaryButton from "../components/PrimaryButton/PrimaryButton";
 
 const ContactUs = () => {
   const {
