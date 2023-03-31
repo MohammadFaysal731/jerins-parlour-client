@@ -3,7 +3,7 @@ import bannerRight from "../../assets/images/beautiful-young-asian-woman-touchin
 import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
 const Banner = () => {
   return (
-    <div className="bg-secondary p-5">
+    <div className="bg-secondary p-5 mb-5">
        <div className="max-w-7xl mx-auto grid grid-cols-1  md:grid-cols-2 place-items-center ">
       {/* banner left  start*/}
       <div className="mb-5 ">

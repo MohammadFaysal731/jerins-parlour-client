@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AiOutlineClose } from "react-icons/ai";
 import logo from "../../assets/icons/logo.png";
 const Header = () => {
   const [open,setOpen]=useState(false);
@@ -27,7 +28,7 @@ const Header = () => {
               onClick={() => setOpen(!open)}
               className="btn btn-square btn-ghost"
             >
-              <svg
+              {open ? <AiOutlineClose className=" w-8 h-8" />:<svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -39,7 +40,8 @@ const Header = () => {
                   strokeWidth="2"
                   d="M4 6h16M4 12h16M4 18h16"
                 ></path>
-              </svg>
+              </svg>}
+             
             </button>
           </div>
           {/* navbar logo and mobile navbar icon end */}
@@ -51,9 +53,7 @@ const Header = () => {
         {/* mobile navbar items  */}
         <ul
           className={`lg:hidden p-5  ${
-            open
-              ? "max-h-auto"
-              : "max-h-0 overflow-hidden"
+            open ? "max-h-auto" : "max-h-0 overflow-hidden"
           }`}
         >
           {menuItems}

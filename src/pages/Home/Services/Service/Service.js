@@ -4,7 +4,7 @@ import PrimaryButton from '../../../../components/PrimaryButton/PrimaryButton';
 const Service = ({ service }) => {
   const {title,description,price,image}=service;
   return (
-    <div className="card w-full bg-base-100 hover:shadow-2xl hover:-translate-y-10 transition-all duration-300 delay-50">
+    <div className="card w-full bg-base-100 hover:shadow-2xl hover:-translate-y-10 transition-all duration-300 delay-100 mt-10">
       <figure className="px-10 pt-10">
         <img src={image} alt="Shoes" className="rounded-xl w-20" />
       </figure>

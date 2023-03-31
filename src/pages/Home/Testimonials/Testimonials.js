@@ -6,8 +6,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { testimonialsData } from "./TestimonialsData";
 const Testimonials = () => {
   return (
-    <div className="max-w-7xl mx-auto">
-      <h2 className="text-3xl font-bold text-center m-10">Testimonials </h2>
+    <div className="max-w-7xl mx-auto mb-5">
+      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center m-10">Testimonials </h2>
       <Swiper
         slidesPerView={1}
         spaceBetween={20}
@@ -38,7 +38,7 @@ const Testimonials = () => {
         {testimonialsData?.map(
           ({ image, name, company, description, ratings }, index) => (
             <SwiperSlide className="mb-5 " key={index}>
-              <div className="border p-5 w-96 ">
+              <div className="hover:border hover:transition-all duration-300 delay-100 p-5 w-96 ">
                 <div className="flex items-center">
                   {/* images  */}
                   <div className="">
