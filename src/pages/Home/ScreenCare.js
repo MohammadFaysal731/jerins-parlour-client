@@ -1,5 +1,5 @@
 import React from 'react';
-import screenCareImage from "../../assets/images/engin-akyurt-g-m8EDc4X6Q-unsplash 1.png";
+import screenCareImage from "../../assets/images/banner-images/engin-akyurt-g-m8EDc4X6Q-unsplash 1.png";
 const ScreenCare = () => {
   return (
     <div className="bg-secondary p-14 mt-5">

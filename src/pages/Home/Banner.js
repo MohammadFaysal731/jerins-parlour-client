@@ -1,5 +1,5 @@
 import React from 'react';
-import bannerRight from "../../assets/images/beautiful-young-asian-woman-touching-her-clean-face-with-fresh-healthy-skin-isolated-white-wall-beauty-cosmetics-facial-treatment-concept 1.png";
+import bannerRight from "../../assets/images/banner-images/beautiful-young-asian-woman-touching-her-clean-face-with-fresh-healthy-skin-isolated-white-wall-beauty-cosmetics-facial-treatment-concept 1.png";
 import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
 const Banner = () => {
   return (

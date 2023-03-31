@@ -1,7 +1,7 @@
 import rating from "../../../assets/icons/rating.png";
-import userImage1 from "../../../assets/images/Ellipse 90.png";
-import userImage2 from "../../../assets/images/Ellipse 91.png";
-import userImage3 from "../../../assets/images/Ellipse 92.png";
+import userImage1 from "../../../assets/images/testimonial-images/Ellipse 90.png";
+import userImage2 from "../../../assets/images/testimonial-images/Ellipse 91.png";
+import userImage3 from "../../../assets/images/testimonial-images/Ellipse 92.png";
 export const testimonialsData = [
   {
     image: userImage1,

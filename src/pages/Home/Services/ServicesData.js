@@ -1,6 +1,6 @@
-import services1 from "../../../assets/icons/service-1.png";
-import services2 from "../../../assets/icons/services-2.png";
-import services3 from "../../../assets/icons/services-3.png";
+import services1 from "../../../assets/icons/services-icons/service-1.png";
+import services2 from "../../../assets/icons/services-icons/services-2.png";
+import services3 from "../../../assets/icons/services-icons/services-3.png";
 export const servicesData = [
   {
     title: "Anti Age Face Treatment",
