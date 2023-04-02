@@ -3,7 +3,7 @@ import ContactUs from '../ContactUs';
 import Banner from './Banner';
 import ScreenCare from './ScreenCare';
 import Services from './Services/Services';
-import Testimonials from './Testimonials/Testimonials';
+import Testimonials from './Testimonials';
 
 const Home = () => {
   return (
