@@ -21,7 +21,7 @@ const SingIn = () => {
         <p className="text-sm md:text-lg whitespace-nowrap">
           Don't have an accent ? &nbsp;
           <span className="text-primary underline">
-            <Link to="/">Create an accent</Link>
+            <Link to="/sing-up">Create an accent</Link>
           </span>
         </p>
       </div>
