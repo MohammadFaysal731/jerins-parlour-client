@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import logo from "../assets/icons/logo.png";
 const SingUp = () => {
 const {
   register,
@@ -16,7 +17,10 @@ const onSubmit = (data) =>{
   return (
     <div className="p-6">
       <div className="border-2 rounded-md mx-auto p-8 max-w-lg">
+        <div className="flex justify-between items-center">
+          <img src={logo} alt=""className="w-24" />
           <h2 className="text-sm md:text-xl font-bold ">Create an account</h2>
+        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           {/*  First Name */}
           <div className="w-full my-5 relative group">

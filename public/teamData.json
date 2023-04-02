@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Faysal",
+    "rating": 5,
+    "img": "https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png",
+    "comments": "This is a very good device."
+  },
+  {
+    "id": 2,
+    "name": "Nasmul",
+    "rating": 4,
+    "img": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+    "comments": "It's have 11 generation intel core i7 it's first."
+  },
+  {
+    "id": 3,
+    "name": "Al-amin",
+    "rating": 4,
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8jI5nNj_3Wocu5DpUuozDKmzb9zYcrq-gbZr3GqWFsI1x5wJ28cYhKaj-d7l6fqRfFng&usqp=CAU",
+    "comments": "It's have 16 GB memory & 512 GB SSD Storage."
+  },
+  {
+    "id": 4,
+    "name": "Arif",
+    "rating": 5,
+    "img": "https://thumbs.dreamstime.com/b/male-avatar-icon-flat-style-male-user-icon-cartoon-man-avatar-hipster-vector-stock-91462833.jpg",
+    "comments": "It's have 14 diagonal FHD display."
+  },
+  {
+    "id": 5,
+    "name": "Imran",
+    "rating": 4,
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG7ZHHUdN_3p6I5EAb0khNR1ESNmRw_z-vLgs-qma5nH4xSxAGC38uSZ9rldLMUTmGkfw&usqp=CAU",
+    "comments": "I can play free fire smoothly"
+  },
+  {
+    "id": 6,
+    "name": "Emon",
+    "rating": 4,
+    "img": "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX28408818.jpg",
+    "comments": "I can coding smoothly here."
+  }
+]
