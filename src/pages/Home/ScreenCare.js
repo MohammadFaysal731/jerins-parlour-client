@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import CountUp from "react-countup";
+
+import ScrollTrigger from 'react-scroll-trigger';
 import screenCareImage from "../../assets/images/banner-images/engin-akyurt-g-m8EDc4X6Q-unsplash 1.png";
 const ScreenCare = () => {
+  const [counterOn, setCounterOn] = useState(false);
   return (
     <div className="bg-secondary p-14 mt-5">
       <div className="max-w-7xl mx-auto p-3 grid grid-cols-1 md:grid-cols-2 gap-4 place-items-center ">
@@ -21,14 +25,24 @@ const ScreenCare = () => {
             {/* happy customer  */}
             <div className="">
               <span className="text-primary font-bold text-2xl md:text-3xl lg:text-5xl">
-                500 +
+                <ScrollTrigger
+                  onEnter={() => setCounterOn(true)}
+                  onExit={() => setCounterOn(false)}
+                >
+                  {counterOn && <CountUp start={0} end={500} duration={5} />}+ 
+                </ScrollTrigger>
               </span>
               <h4 className="font-semibold mt-3">Happy Customer</h4>
             </div>
             {/* total service */}
             <div className="">
               <span className="text-primary font-bold text-2xl md:text-3xl lg:text-5xl">
-                16 +
+                <ScrollTrigger
+                  onEnter={() => setCounterOn(true)}
+                  onExit={() => setCounterOn(false)}
+                >
+                  {counterOn && <CountUp start={0} end={16} duration={5}/>}+
+                </ScrollTrigger>
               </span>
               <h4 className="font-semibold mt-3">Total Service</h4>
             </div>
