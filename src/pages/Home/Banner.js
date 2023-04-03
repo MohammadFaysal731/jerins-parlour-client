@@ -1,6 +1,6 @@
 import React from 'react';
 import bannerRight from "../../assets/images/banner-images/beautiful-young-asian-woman-touching-her-clean-face-with-fresh-healthy-skin-isolated-white-wall-beauty-cosmetics-facial-treatment-concept 1.png";
-import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
+import PrimaryButton from '../../components/PrimaryButton';
 const Banner = () => {
   return (
     <div className="bg-secondary p-5 mb-5">

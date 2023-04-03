@@ -1,5 +1,5 @@
 import React from 'react';
-import PrimaryButton from '../../../../components/PrimaryButton/PrimaryButton';
+import PrimaryButton from '../../../../components/PrimaryButton';
 
 const Service = ({ service }) => {
   const {title,description,price,image,shadow}=service;

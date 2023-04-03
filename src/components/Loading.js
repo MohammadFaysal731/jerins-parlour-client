@@ -1,5 +1,5 @@
 import React from "react";
-import loading from "../assets/icons/loading-removebg-preview.png";
+import loading from "../assets/icons/loading.png";
 const Loading = () => {
   return (
     <div className="flex flex-col items-center my-20">

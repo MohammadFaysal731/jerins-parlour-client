@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PrimaryButton from "../../../components/PrimaryButton/PrimaryButton";
+import PrimaryButton from "../../../components/PrimaryButton";
 import Service from "./Service/Service";
 const Services = () => {
   const [services, setServices]=useState([]);
