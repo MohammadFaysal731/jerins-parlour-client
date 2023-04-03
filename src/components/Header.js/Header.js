@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { AiOutlineClose } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
-import logo from "../../assets/icons/logo.png";
+import Logo from "../../assets/icons/logo.png";
+import User from "../../assets/icons/user.jpg";
 import { auth } from "../../firebase.init";
 import { headerData } from "./HeaderData";
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [user] = useAuthState(auth);
   const [signOut] = useSignOut(auth);
-  
+  console.log(user);
   const menuItems = (
     <>
       {headerData?.map(({ text, path }, index) => (
@@ -32,12 +33,20 @@ const Header = () => {
       {user ? (
         <>
           <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
-            <span className="uppercase text-primary border-4 border-primary p-2 rounded-full">
-              {user?.displayName && user?.displayName?.slice(0, 2)}
-            </span>
+            {user.photoURL ? (
+              <img
+                className="rounded-circle w-10"
+                src={user?.photoURL}
+                alt=""
+              />
+            ) : (
+              <img className="rounded-circle w-10" src={User} alt="" />
+            )}
           </li>
           <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
-            <button onClick={()=>signOut()} className="hover:text-primary">Sing out</button>
+            <button onClick={() => signOut()} className="hover:text-primary">
+              Sing out
+            </button>
           </li>
         </>
       ) : (
@@ -63,7 +72,7 @@ const Header = () => {
           {/* navbar logo and mobile navbar icon start */}
           {/* logo  */}
           <div className="">
-            <img src={logo} alt="" className="h-12" />
+            <img src={Logo} alt="" className="h-12" />
           </div>
           {/* mobile navbar icon */}
           <div className="lg:hidden">
