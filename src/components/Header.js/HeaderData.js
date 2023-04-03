@@ -23,8 +23,4 @@ export const headerData = [
     text: "Contact Us",
     path: "/contact-us",
   },
-  {
-    text: "Sign in",
-    path: "/sign-in",
-  },
 ];

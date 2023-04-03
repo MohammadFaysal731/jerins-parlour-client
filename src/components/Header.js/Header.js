@@ -1,10 +1,15 @@
 import React, { useState } from "react";
+import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { AiOutlineClose } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/icons/logo.png";
+import { auth } from "../../firebase.init";
 import { headerData } from "./HeaderData";
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const [user] = useAuthState(auth);
+  const [signOut] = useSignOut(auth);
+  
   const menuItems = (
     <>
       {headerData?.map(({ text, path }, index) => (
@@ -24,6 +29,31 @@ const Header = () => {
           </NavLink>
         </li>
       ))}
+      {user ? (
+        <>
+          <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
+            <span className="uppercase text-primary border-4 border-primary p-2 rounded-full">
+              {user?.displayName && user?.displayName?.slice(0, 2)}
+            </span>
+          </li>
+          <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
+            <button onClick={()=>signOut()} className="hover:text-primary">Sing out</button>
+          </li>
+        </>
+      ) : (
+        <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
+          <NavLink
+            to="/sign-in"
+            style={({ isActive }) => {
+              return {
+                color: isActive ? "#F63E7B" : "black",
+              };
+            }}
+          >
+            Sign in
+          </NavLink>
+        </li>
+      )}
     </>
   );
   return (
