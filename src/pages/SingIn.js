@@ -1,5 +1,5 @@
-import React from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import React, { useRef } from "react";
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/icons/logo.png";
@@ -9,37 +9,49 @@ import { auth } from "../firebase.init";
 
 const SingIn = () => {
   const [signInWithEmailAndPassword, emailUser, emailLoading, emailError] =useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail, resetSending, resetError] =useSendPasswordResetEmail(auth);
+  const emailRef=useRef('') 
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
   } = useForm();
-  const navigate = useNavigate();
+const navigate = useNavigate();
 let errorElement;
   if (emailUser) {
     navigate("/dashboard");
   }
-  if (emailLoading) {
+  if (emailLoading || resetSending) {
     return <Loading />;
   }
-  if (emailError) {
+  if (emailError ||resetError) {
   errorElement = (
     <p className="text-red-500 text-center m-2">
-      <small>{emailUser?.message}</small>
+      <small>{emailUser?.message||resetError?.message}</small>
     </p>
   ); 
   }
-
    const onSubmit = (data) => {
      const email =data.emailAddress;
      const password=data.password;
      signInWithEmailAndPassword(email, password);
      reset();
    };
+const handleForgetPassword=()=>{
+  const email = emailRef.current.value
+  if(email){
+      sendPasswordResetEmail(email);
+      alert("Forget email send")
+  }
+  else{
+    alert("Please put you email")
+  }
+}
+
   return (
     <div className="p-6">
-      <div className="mx-auto max-w-lg">
+      <div className="mx-auto max-w-xl">
         <div className="border-2 rounded-md p-8">
           <div className="flex justify-between items-center">
             <img src={logo} alt="" className="w-24" />
@@ -55,6 +67,7 @@ let errorElement;
                     message: "Email is required",
                   },
                 })}
+                ref={emailRef}
                 type="email"
                 name="emailAddress"
                 id="email-address"
@@ -119,12 +132,20 @@ let errorElement;
               className="text-sm md:text-lg text-white bg-primary px-8 py-2 rounded-md w-full"
             />
           </form>
-          <p className="m-2 text-center text-sm md:text-lg whitespace-nowrap">
-            Don't have an accent ? &nbsp;
-            <span className="text-primary underline">
-              <Link to="/sing-up">Create an account</Link>
-            </span>
-          </p>
+          <div className="flex justify-between items-center">
+            <p className="m-2 text-center text-sm md:text-lg whitespace-nowrap">
+              Don't have an accent ? &nbsp;
+              <span className="text-primary underline">
+                <Link to="/sing-up">Create an account</Link>
+              </span>
+            </p>
+            <button
+              onClick={handleForgetPassword}
+              className="m-2 text-sm md:text-lg whitespace-nowrap text-primary underline"
+            >
+              Forget Password
+            </button>
+          </div>
         </div>
         <SocialSignIn />
       </div>

@@ -52,7 +52,7 @@ const SingUp = () => {
 
   return (
     <div className="p-6">
-      <div className="mx-auto max-w-lg">
+      <div className="mx-auto max-w-xl">
         <div className="border-2 rounded-md p-8">
            <div className="flex justify-between items-center">
           <img src={logo} alt="" className="w-24" />
