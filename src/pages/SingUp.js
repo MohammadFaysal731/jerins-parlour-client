@@ -210,7 +210,7 @@ const SingUp = () => {
           <p className="text-center text-sm md:text-lg m-2 ">
             Already have an account ? &nbsp;
             <Link to="/sign-in" className="text-primary underline">
-              Sign in
+              Sing in
             </Link>
           </p>
         </div>

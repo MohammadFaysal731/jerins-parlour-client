@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { AiOutlineClose } from "react-icons/ai";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../../assets/icons/logo.png";
 import User from "../../assets/icons/user.jpg";
 import { auth } from "../../firebase.init";
@@ -72,7 +72,9 @@ const Header = () => {
           {/* navbar logo and mobile navbar icon start */}
           {/* logo  */}
           <div className="">
+          <Link to="/">
             <img src={Logo} alt="" className="h-12" />
+          </Link>  
           </div>
           {/* mobile navbar icon */}
           <div className="lg:hidden">
