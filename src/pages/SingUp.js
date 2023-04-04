@@ -3,8 +3,8 @@ import {
   useCreateUserWithEmailAndPassword, useUpdateProfile
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/icons/logo.png";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Logo from "../assets/icons/logo.png";
 import Loading from "../components/Loading";
 import SocialSignIn from "../components/SocialSignIn";
 import { auth } from "../firebase.init";
@@ -18,13 +18,14 @@ const SingUp = () => {
     reset,
   } = useForm();
   const navigate = useNavigate();
+  const location = useLocation();
   let errorElement;
-  useEffect(() => {
-    if (emailUser) {
-      navigate("/dashboard");
-    }
-  }, [emailUser,navigate]);
-  
+  const from = location.state?.from?.pathname || "/"; 
+useEffect(() => {
+  if (emailUser) {
+    navigate(from, { replace: true });
+  }
+}, [emailUser, navigate, from]);
   if (emailUserLoading || updating) {
     return <Loading />;
   }
@@ -55,7 +56,7 @@ const SingUp = () => {
       <div className="mx-auto max-w-xl">
         <div className="border-2 rounded-md p-8">
            <div className="flex justify-between items-center">
-          <img src={logo} alt="" className="w-24" />
+          <img src={Logo} alt="" className="w-24" />
           <h2 className="text-sm md:text-xl font-bold ">Create an account</h2>
         </div>
           <form onSubmit={handleSubmit(onSubmit)}>

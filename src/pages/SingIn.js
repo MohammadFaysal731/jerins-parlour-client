@@ -1,53 +1,61 @@
-import React, { useRef } from "react";
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import React, { useEffect, useRef } from "react";
+import {
+  useSendPasswordResetEmail,
+  useSignInWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/icons/logo.png";
 import Loading from "../components/Loading";
 import SocialSignIn from "../components/SocialSignIn";
 import { auth } from "../firebase.init";
 
 const SingIn = () => {
-  const [signInWithEmailAndPassword, emailUser, emailLoading, emailError] =useSignInWithEmailAndPassword(auth);
-  const [sendPasswordResetEmail, resetSending, resetError] =useSendPasswordResetEmail(auth);
-  const emailRef=useRef('') 
+  const [signInWithEmailAndPassword, emailUser, emailLoading, emailError] =
+    useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail, resetSending, resetError] =
+    useSendPasswordResetEmail(auth);
+  const emailRef = useRef("");
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
   } = useForm();
-const navigate = useNavigate();
-let errorElement;
-  if (emailUser) {
-    navigate("/dashboard");
-  }
+  const navigate = useNavigate();
+  const location = useLocation();
+  let errorElement;
+  const from = location.state?.from?.pathname || "/";
+  useEffect(() => {
+    if (emailUser) {
+      navigate(from, { replace: true });
+    }
+  }, [emailUser, navigate, from]);
   if (emailLoading || resetSending) {
     return <Loading />;
   }
-  if (emailError ||resetError) {
-  errorElement = (
-    <p className="text-red-500 text-center m-2">
-      <small>{emailUser?.message||resetError?.message}</small>
-    </p>
-  ); 
+  if (emailError || resetError) {
+    errorElement = (
+      <p className="text-red-500 text-center m-2">
+        <small>{emailUser?.message || resetError?.message}</small>
+      </p>
+    );
   }
-   const onSubmit = (data) => {
-     const email =data.emailAddress;
-     const password=data.password;
-     signInWithEmailAndPassword(email, password);
-     reset();
-   };
-const handleForgetPassword=()=>{
-  const email = emailRef.current.value
-  if(email){
+  const onSubmit = (data) => {
+    const email = data.emailAddress;
+    const password = data.password;
+    signInWithEmailAndPassword(email, password);
+    reset();
+  };
+  const handleForgetPassword = () => {
+    const email = emailRef.current.value;
+    if (email) {
       sendPasswordResetEmail(email);
-      alert("Forget email send")
-  }
-  else{
-    alert("Please put you email")
-  }
-}
+      alert("Forget email send");
+    } else {
+      alert("Please put you email");
+    }
+  };
 
   return (
     <div className="p-6">

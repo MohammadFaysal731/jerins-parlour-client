@@ -1,29 +1,35 @@
-import React from 'react';
-import { useSignInWithFacebook, useSignInWithGoogle } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import {
+  useSignInWithFacebook,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
+import { useLocation, useNavigate } from "react-router-dom";
 import facebook from "../assets/icons/facebook.png";
 import google from "../assets/icons/google.png";
-import { auth } from '../firebase.init';
-import Loading from './Loading';
+import { auth } from "../firebase.init";
+import Loading from "./Loading";
 
 const SocialSignIn = () => {
-const [signInWithGoogle, googleUser, googleLoading, googleError] =useSignInWithGoogle(auth);
-const [signInWithFacebook, facebookUser, facebookLoading, facebookError] =useSignInWithFacebook(auth);
-const navigate = useNavigate();
-let errorElement;
-
-  if (googleUser || facebookUser) {
-    navigate("/dashboard");
-  }
+  const [signInWithGoogle, googleUser, googleLoading, googleError] =
+    useSignInWithGoogle(auth);
+  const [signInWithFacebook, facebookUser, facebookLoading, facebookError] =
+    useSignInWithFacebook(auth);
+  const navigate = useNavigate();
+  const location = useLocation();
+  let errorElement;
+  const from = location.state?.from?.pathname || "/";
+  useEffect(() => {
+    if (googleUser || facebookUser) {
+      navigate(from, { replace: true });
+    }
+  }, [googleUser, facebookUser, navigate, from]);
   if (googleLoading || facebookLoading) {
     return <Loading />;
   }
   if (googleError || facebookError) {
     errorElement = (
       <p className="text-red-500 text-center m-2">
-        <small>
-          {googleError?.message || facebookError?.message}
-        </small>
+        <small>{googleError?.message || facebookError?.message}</small>
       </p>
     );
   }

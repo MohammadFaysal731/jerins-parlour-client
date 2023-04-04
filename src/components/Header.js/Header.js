@@ -35,12 +35,12 @@ const Header = () => {
           <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
             {user.photoURL ? (
               <img
-                className="rounded-circle w-10"
+                className="rounded-full w-10"
                 src={user?.photoURL}
                 alt=""
               />
             ) : (
-              <img className="rounded-circle w-10" src={User} alt="" />
+              <img className="rounded-full w-10" src={User} alt="" />
             )}
           </li>
           <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">

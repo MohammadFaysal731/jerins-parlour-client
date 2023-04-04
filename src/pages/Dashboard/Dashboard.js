@@ -59,7 +59,9 @@ const Dashboard = () => {
       </div>
       <div className="border flex-1 h-screen">
         <nav className="h-[55px] bg-secondary">
-          <Link to="/">Home</Link>
+          <Link to="/">
+           <span className="text-sm md:text-2xl">Home</span> 
+            </Link>
         </nav>
         <div className="p-7">
           <Outlet />
