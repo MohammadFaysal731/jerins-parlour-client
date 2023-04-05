@@ -5,6 +5,7 @@ import {
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import logo from "../assets/icons/logo.png";
 import Loading from "../components/Loading";
 import SocialSignIn from "../components/SocialSignIn";
@@ -51,9 +52,9 @@ const SingIn = () => {
     const email = emailRef.current.value;
     if (email) {
       sendPasswordResetEmail(email);
-      alert("Forget email send");
+      toast.success("Forget email was send. check your mail");
     } else {
-      alert("Please put you email");
+     toast.error("Please put your email");
     }
   };
 
@@ -76,6 +77,7 @@ const SingIn = () => {
                   },
                 })}
                 ref={emailRef}
+                autoComplete="off"
                 type="email"
                 name="emailAddress"
                 id="email-address"
@@ -109,6 +111,7 @@ const SingIn = () => {
                     message: "Minimum length is 8",
                   },
                 })}
+                autoComplete="off"
                 type="password"
                 name="password"
                 id="password"

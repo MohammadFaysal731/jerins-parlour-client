@@ -9,7 +9,7 @@ export const headerData = [
   },
   {
     text: "Dashboard",
-    path: "/dashboard",
+    path: "/dashboard/book",
   },
   {
     text: "About",

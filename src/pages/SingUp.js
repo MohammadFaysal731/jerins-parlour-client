@@ -4,6 +4,7 @@ import {
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Logo from "../assets/icons/logo.png";
 import Loading from "../components/Loading";
 import SocialSignIn from "../components/SocialSignIn";
@@ -45,7 +46,7 @@ useEffect(() => {
      await createUserWithEmailAndPassword(email, password)
      const success = await updateProfile({ displayName: name });
      if(success){
-      alert("updated profile")
+      toast.success(`${email}s profile was updated`)
       reset(); 
      }
     }
@@ -55,10 +56,10 @@ useEffect(() => {
     <div className="p-6">
       <div className="mx-auto max-w-xl">
         <div className="border-2 rounded-md p-8">
-           <div className="flex justify-between items-center">
-          <img src={Logo} alt="" className="w-24" />
-          <h2 className="text-sm md:text-xl font-bold ">Create an account</h2>
-        </div>
+          <div className="flex justify-between items-center">
+            <img src={Logo} alt="" className="w-24" />
+            <h2 className="text-sm md:text-xl font-bold ">Create an account</h2>
+          </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/*  Full Name */}
             <div className="w-full my-5 relative group">
@@ -73,6 +74,7 @@ useEffect(() => {
                     message: "Maximum word  is 16 ",
                   },
                 })}
+                autoComplete="off"
                 type="text"
                 name="fullName"
                 id="full-name"
@@ -101,6 +103,7 @@ useEffect(() => {
                     message: "Email is required",
                   },
                 })}
+                autoComplete="off"
                 type="email"
                 name="emailAddress"
                 id="email-address"
@@ -134,6 +137,7 @@ useEffect(() => {
                     message: "Minimum length is 8",
                   },
                 })}
+                autoComplete="off"
                 type="password"
                 name="password"
                 id="password"
@@ -177,6 +181,7 @@ useEffect(() => {
                     message: "Minimum length is 8",
                   },
                 })}
+                autoComplete="off"
                 type="password"
                 name="confirmPassword"
                 placeholder="Confirm Password"
@@ -215,7 +220,7 @@ useEffect(() => {
             </Link>
           </p>
         </div>
-        <SocialSignIn/>
+        <SocialSignIn />
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { Autoplay, FreeMode, Pagination } from "swiper";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
+import rating from "../../assets/icons/rating.png";
 const Testimonials = () => {
     const [reviews, setReviews] = useState([]);
     useEffect(() => {
@@ -43,13 +44,13 @@ const Testimonials = () => {
         className="p-5 cursor-pointer"
       >
         {reviews?.map(
-          ({ image , name, company, description, ratings }, index) => (
+          ({ image, name, company, description, ratings }, index) => (
             <SwiperSlide className="mb-5 " key={index}>
               <div className="hover:border hover:transition-all duration-300 delay-100 p-5 w-96 ">
                 <div className="flex items-center">
                   {/* images  */}
                   <div className="">
-                    <img src={image} alt="reviews" className="w-14" />
+                    <img src={image} alt="review_image" className="w-14 rounded-full" />
                   </div>
                   {/* name and company */}
                   <div className="mx-3">
@@ -63,20 +64,13 @@ const Testimonials = () => {
                 </div>
                 <div className="">
                   <h3 className="m-2">{description}</h3>
-                  {ratings?.map(({ one, two, three, four, five, index }) => (
-                    <div className="flex mt-3" key={index}>
-                      <img src={one} alt="" className="w-6 mx-1" key={index} />
-                      <img src={two} alt="" className="w-6 mx-1" key={index} />
-                      <img
-                        src={three}
-                        alt=""
-                        className="w-6 mx-1"
-                        key={index}
-                      />
-                      <img src={four} alt="" className="w-6 mx-1" key={index} />
-                      <img src={five} alt="" className="w-6 mx-1" key={index} />
-                    </div>
-                  ))}
+                  <div className="flex mt-3" key={index}>
+                    <img src={rating} alt="" className="w-6 mx-1" key={index} />
+                    <img src={rating} alt="" className="w-6 mx-1" key={index} />
+                    <img src={rating} alt="" className="w-6 mx-1" key={index} />
+                    <img src={rating} alt="" className="w-6 mx-1" key={index} />
+                    <img src={rating} alt="" className="w-6 mx-1" key={index} />
+                  </div>
                 </div>
               </div>
             </SwiperSlide>

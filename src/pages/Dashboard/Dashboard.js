@@ -11,7 +11,7 @@ const Dashboard = () => {
       <div
         className={`border ${
           open ? "md:w-72" : "w-20"
-        } h-screen bg-secondary duration-300 `}
+        } min-h-screen    bg-secondary duration-300 `}
       >
         <div className="relative">
           {/* logo  */}
@@ -19,9 +19,7 @@ const Dashboard = () => {
             <img
               src={Logo}
               alt=""
-              className={`w-10 md:w-20 duration-500 ${
-                open && "rotate-180"
-              }`}
+              className={`w-10 md:w-20 duration-500 ${open && "rotate-180"}`}
             />
             <span className={`origin-left duration-300 ${!open && "scale-0"}`}>
               <p className="text-sm md:text-xl font-bold">Jerin's</p>
@@ -42,26 +40,31 @@ const Dashboard = () => {
         <ul className="mt-5">
           {dashboardData?.map(({ name, icon, link }, index) => (
             <li
-              className={`hover:text-primary flex items-center mx-5 my-5 text-sm md:text-xl font-bold `}
+              className={`hover:text-primary flex items-center mx-5 ${
+                open && "me-12"
+              } my-5 text-sm md:text-xl font-bold `}
               key={index}
             >
-              
-                <img src={icon} alt="" className="w-6" />
+              <img src={icon} alt="" className="w-9 " />
               &nbsp;
               <span
-                className={`origin-left duration-300 ${!open && "scale-0"} `}
+                className={`${!open && "hidden"} origin-left duration-300 ${
+                  !open && "scale-0"
+                } `}
               >
-                <Link to={link}>{name}</Link>
+                <Link to={link}>
+                  <small>{name}</small>
+                </Link>
               </span>
             </li>
           ))}
         </ul>
       </div>
-      <div className="border flex-1 h-screen">
+      <div className="border flex-1 min-h-screen">
         <nav className="h-[55px] bg-secondary">
           <Link to="/">
-           <span className="text-sm md:text-2xl">Home</span> 
-            </Link>
+            <span className="text-sm md:text-2xl mx-5">Home</span>
+          </Link>
         </nav>
         <div className="p-7">
           <Outlet />

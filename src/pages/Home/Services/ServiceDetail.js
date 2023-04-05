@@ -38,7 +38,7 @@ const ServiceDetail = () => {
       phoneNumber,
     };  
     // send the data on mongodb
-    fetch(`http://localhost:5000/booked`, {
+    fetch(`http://localhost:5000/booking`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -180,7 +180,7 @@ const ServiceDetail = () => {
           <input
             type="submit"
             value="Submit"
-            className="text-sm md:text-lg text-white bg-primary px-8 py-2 rounded-md "
+            className="cursor-pointer text-sm md:text-lg text-white bg-primary px-8 py-2 rounded-md "
           />
         </form>
       </div>
