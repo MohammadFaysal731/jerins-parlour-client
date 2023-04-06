@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import facebook from "../assets/icons/facebook.png";
 import google from "../assets/icons/google.png";
 import { auth } from "../firebase.init";
+import useToken from "../hooks/useToken";
 import Loading from "./Loading";
 
 const SocialSignIn = () => {
@@ -14,15 +15,16 @@ const SocialSignIn = () => {
     useSignInWithGoogle(auth);
   const [signInWithFacebook, facebookUser, facebookLoading, facebookError] =
     useSignInWithFacebook(auth);
+  const [token] = useToken(googleUser || facebookUser); 
   const navigate = useNavigate();
   const location = useLocation();
   let errorElement;
   const from = location.state?.from?.pathname || "/";
   useEffect(() => {
-    if (googleUser || facebookUser) {
+    if (token) {
       navigate(from, { replace: true });
     }
-  }, [googleUser, facebookUser, navigate, from]);
+  }, [token, navigate, from]);
   if (googleLoading || facebookLoading) {
     return <Loading />;
   }

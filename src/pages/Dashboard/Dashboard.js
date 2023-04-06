@@ -8,10 +8,11 @@ const Dashboard = () => {
 
   return (
     <div className="flex">
+      {/* left side */}
       <div
         className={`border ${
           open ? "md:w-72" : "w-20"
-        } min-h-screen    bg-secondary duration-300 `}
+        } min-h-screen bg-secondary duration-300`}
       >
         <div className="relative">
           {/* logo  */}
@@ -38,14 +39,21 @@ const Dashboard = () => {
         </div>
         {/* dashboard menu items */}
         <ul className="mt-5">
-          {dashboardData?.map(({ name, icon, link }, index) => (
+          {dashboardData?.map(({ name, icons, link }, index) => (
             <li
               className={`hover:text-primary flex items-center mx-5 ${
                 open && "me-12"
               } my-5 text-sm md:text-xl font-bold `}
               key={index}
             >
-              <img src={icon} alt="" className="w-9 " />
+              {/* icons */}
+              <div className="">
+                <span className="text-3xl ">
+                  <Link to={link}>
+                    <small>{icons}</small>
+                  </Link>
+                </span>
+              </div>
               &nbsp;
               <span
                 className={`${!open && "hidden"} origin-left duration-300 ${
@@ -60,6 +68,7 @@ const Dashboard = () => {
           ))}
         </ul>
       </div>
+      {/* right side */}
       <div className="border flex-1 min-h-screen">
         <nav className="h-[55px] bg-secondary">
           <Link to="/">

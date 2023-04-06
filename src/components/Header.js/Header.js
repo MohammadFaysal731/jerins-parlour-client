@@ -10,7 +10,10 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const [user] = useAuthState(auth);
   const [signOut] = useSignOut(auth);
-  console.log(user);
+  const handleSignOut =()=>{
+    signOut();
+    localStorage.removeItem("accessToken");
+  }
   const menuItems = (
     <>
       {headerData?.map(({ text, path }, index) => (
@@ -34,17 +37,13 @@ const Header = () => {
         <>
           <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
             {user.photoURL ? (
-              <img
-                className="rounded-full w-10"
-                src={user?.photoURL}
-                alt=""
-              />
+              <img className="rounded-full w-10" src={user?.photoURL} alt="" />
             ) : (
               <img className="rounded-full w-10" src={User} alt="" />
             )}
           </li>
           <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
-            <button onClick={() => signOut()} className="hover:text-primary">
+            <button onClick={handleSignOut} className="hover:text-primary">
               Sing out
             </button>
           </li>

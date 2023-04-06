@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { toast } from 'react-toastify';
 import PrimaryButton from '../../components/PrimaryButton';
-const Review = () => {
+const AddReview = () => {
    const { register, handleSubmit, formState: { errors },reset } = useForm();
    const imgbbStorageApiKey = `45c46a1b32a1d6a38d670e42fa5d2349`;
    
@@ -193,4 +193,4 @@ const Review = () => {
   );
 };
 
-export default Review;
+export default AddReview;

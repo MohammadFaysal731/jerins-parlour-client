@@ -6,9 +6,10 @@ import Header from '../components/Header.js/Header';
 const MainLayout = () => {
   return (
     <div>
-      <Header/>
-      <Outlet/>
-      <Footer/>
+      <Header />
+      <Outlet />
+      <Footer />
+     
     </div>
   );
 };

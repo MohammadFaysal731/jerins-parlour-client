@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import PrimaryButton from "../../components/PrimaryButton";
 import { auth } from "../../firebase.init";
 
-const BookingList = () => {
+const MyBookingList = () => {
    const [myBooking, setMyBooking] = useState([]);
    const [user] = useAuthState(auth);
    useEffect(() => {
@@ -44,4 +44,4 @@ const BookingList = () => {
   );
 };
 
-export default BookingList;
+export default MyBookingList;

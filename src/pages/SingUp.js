@@ -1,16 +1,22 @@
 import React, { useEffect } from "react";
 import {
-  useCreateUserWithEmailAndPassword, useUpdateProfile
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Logo from "../assets/icons/logo.png";
 import Loading from "../components/Loading";
 import SocialSignIn from "../components/SocialSignIn";
 import { auth } from "../firebase.init";
+import useToken from "../hooks/useToken";
 const SingUp = () => {
-  const [createUserWithEmailAndPassword, emailUser, emailUserLoading, emailUserError] =useCreateUserWithEmailAndPassword(auth,{sendEmailVerification:true});
+  const [
+    createUserWithEmailAndPassword,
+    emailUser,
+    emailUserLoading,
+    emailUserError,
+  ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
   const [updateProfile, updating, updatingError] = useUpdateProfile(auth);
   const {
     register,
@@ -18,37 +24,35 @@ const SingUp = () => {
     handleSubmit,
     reset,
   } = useForm();
+  const [token] = useToken(emailUser);
   const navigate = useNavigate();
   const location = useLocation();
   let errorElement;
-  const from = location.state?.from?.pathname || "/"; 
-useEffect(() => {
-  if (emailUser) {
-    navigate(from, { replace: true });
-  }
-}, [emailUser, navigate, from]);
+  const from = location.state?.from?.pathname || "/";
+  useEffect(() => {
+    if (token) {
+      navigate(from, { replace: true });
+    }
+  }, [token, navigate, from]);
   if (emailUserLoading || updating) {
     return <Loading />;
   }
-  if(emailUserError ||updatingError){
+  if (emailUserError || updatingError) {
     errorElement = (
       <p className="text-red-500 text-center m-2">
-        <small>{emailUser?.message || updatingError.message}</small>
+        <small>{emailUserError?.message || updatingError?.message}</small>
       </p>
-    ); 
+    );
   }
   const onSubmit = async (data) => {
-   const name= data.fullName;
-   const email = data.emailAddress;
-   const password = data.password;
-   const confirmPassword = data.confirmPassword;
-    if(password === confirmPassword){
-     await createUserWithEmailAndPassword(email, password)
-     const success = await updateProfile({ displayName: name });
-     if(success){
-      toast.success(`${email}s profile was updated`)
-      reset(); 
-     }
+    const name = data.fullName;
+    const email = data.emailAddress;
+    const password = data.password;
+    const confirmPassword = data.confirmPassword;
+    if (password === confirmPassword) {
+      await createUserWithEmailAndPassword(email, password);
+      await updateProfile({ displayName: name });
+      reset();
     }
   };
 
@@ -82,14 +86,14 @@ useEffect(() => {
                 className="w-full h-10 px-4 placeholder-black text-sm peer border-b-2 border-accent outline-none"
               />
               <label htmlFor="full-name" className="">
-                {errors.fullName?.type === "required" && (
+                {errors?.fullName?.type === "required" && (
                   <p className="text-red-500">
-                    <small>{errors.fullName.message}</small>
+                    <small>{errors?.fullName.message}</small>
                   </p>
                 )}
-                {errors.fullName?.type === "maxLength" && (
+                {errors?.fullName?.type === "maxLength" && (
                   <p className="text-red-500">
-                    <small>{errors.fullName.message}</small>
+                    <small>{errors?.fullName.message}</small>
                   </p>
                 )}
               </label>
@@ -111,9 +115,9 @@ useEffect(() => {
                 className="w-full h-10 px-4 placeholder-black text-sm peer border-b-2 border-accent outline-none"
               />
               <label htmlFor="full-name" className="">
-                {errors.emailAddress?.type === "required" && (
+                {errors?.emailAddress?.type === "required" && (
                   <p className="text-red-500">
-                    <small>{errors.emailAddress?.message}</small>
+                    <small>{errors?.emailAddress?.message}</small>
                   </p>
                 )}
               </label>
@@ -132,9 +136,9 @@ useEffect(() => {
                     message:
                       "At least one special, tow uppercase, tow digit, three lowercase, minimum character length is 8",
                   },
-                  minLength: {
+                  maxLength: {
                     value: 8,
-                    message: "Minimum length is 8",
+                    message: "Maximum length is 8",
                   },
                 })}
                 autoComplete="off"
@@ -145,17 +149,17 @@ useEffect(() => {
                 className="w-full h-10 px-4 placeholder-black text-sm peer border-b-2 border-accent outline-none"
               />
               <label htmlFor="full-name" className="">
-                {errors.password?.type === "required" && (
+                {errors?.password?.type === "required" && (
                   <p className="text-red-500">
                     <small>{errors?.password?.message}</small>
                   </p>
                 )}
-                {errors.password?.type === "pattern" && (
+                {errors?.password?.type === "pattern" && (
                   <p className="text-red-500">
                     <small>{errors?.password?.message}</small>
                   </p>
                 )}
-                {errors.password?.type === "minLength" && (
+                {errors?.password?.type === "maxLength" && (
                   <p className="text-red-500">
                     <small>{errors?.password?.message}</small>
                   </p>
@@ -176,9 +180,9 @@ useEffect(() => {
                     message:
                       "At least one special, tow uppercase, tow digit, three lowercase, minimum character length is 8",
                   },
-                  minLength: {
+                  maxLength: {
                     value: 8,
-                    message: "Minimum length is 8",
+                    message: "Maximum length is 8",
                   },
                 })}
                 autoComplete="off"
@@ -189,17 +193,17 @@ useEffect(() => {
                 className="w-full h-10 px-4 placeholder-black text-sm peer border-b-2 border-accent outline-none"
               />
               <label htmlFor="full-name" className="">
-                {errors.confirmPassword?.type === "required" && (
+                {errors?.confirmPassword?.type === "required" && (
                   <p className="text-red-500">
                     <small>{errors?.confirmPassword?.message}</small>
                   </p>
                 )}
-                {errors.confirmPassword?.type === "pattern" && (
+                {errors?.confirmPassword?.type === "pattern" && (
                   <p className="text-red-500">
                     <small>{errors?.confirmPassword?.message}</small>
                   </p>
                 )}
-                {errors.confirmPassword?.type === "minLength" && (
+                {errors?.confirmPassword?.type === "maxLength" && (
                   <p className="text-red-500">
                     <small>{errors?.confirmPassword?.message}</small>
                   </p>
@@ -210,7 +214,7 @@ useEffect(() => {
             <input
               type="submit"
               value=" Create an account"
-              className="text-sm md:text-lg text-white bg-primary px-8 py-2 rounded-md w-full"
+              className="cursor-pointer text-sm md:text-lg text-white bg-primary px-8 py-2 rounded-md w-full"
             />
           </form>
           <p className="text-center text-sm md:text-lg m-2 ">

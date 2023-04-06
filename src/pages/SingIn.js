@@ -10,12 +10,14 @@ import logo from "../assets/icons/logo.png";
 import Loading from "../components/Loading";
 import SocialSignIn from "../components/SocialSignIn";
 import { auth } from "../firebase.init";
+import useToken from "../hooks/useToken";
 
 const SingIn = () => {
   const [signInWithEmailAndPassword, emailUser, emailLoading, emailError] =
     useSignInWithEmailAndPassword(auth);
   const [sendPasswordResetEmail, resetSending, resetError] =
     useSendPasswordResetEmail(auth);
+  const [token] = useToken(emailUser); 
   const emailRef = useRef("");
   const {
     register,
@@ -28,10 +30,10 @@ const SingIn = () => {
   let errorElement;
   const from = location.state?.from?.pathname || "/";
   useEffect(() => {
-    if (emailUser) {
+    if (token) {
       navigate(from, { replace: true });
     }
-  }, [emailUser, navigate, from]);
+  }, [token, navigate, from]);
   if (emailLoading || resetSending) {
     return <Loading />;
   }
@@ -76,7 +78,6 @@ const SingIn = () => {
                     message: "Email is required",
                   },
                 })}
-                ref={emailRef}
                 autoComplete="off"
                 type="email"
                 name="emailAddress"
@@ -84,7 +85,7 @@ const SingIn = () => {
                 placeholder="Email Address"
                 className="w-full h-10 px-4 placeholder-black text-sm peer border-b-2 border-accent outline-none"
               />
-              <label htmlFor="first-name" className="">
+              <label htmlFor="full-name" className="">
                 {errors.emailAddress?.type === "required" && (
                   <p className="text-red-500">
                     <small>{errors.emailAddress?.message}</small>
@@ -106,7 +107,7 @@ const SingIn = () => {
                     message:
                       "At least one special, tow uppercase, tow digit, three lowercase, minimum character length is 8",
                   },
-                  minLength: {
+                  maxLength: {
                     value: 8,
                     message: "Minimum length is 8",
                   },
@@ -119,17 +120,17 @@ const SingIn = () => {
                 className="w-full h-10 px-4 placeholder-black text-sm peer border-b-2 border-accent outline-none"
               />
               <label htmlFor="first-name" className="">
-                {errors.password?.type === "required" && (
+                {errors?.password?.type === "required" && (
                   <p className="text-red-500">
                     <small>{errors?.password?.message}</small>
                   </p>
                 )}
-                {errors.password?.type === "pattern" && (
+                {errors?.password?.type === "pattern" && (
                   <p className="text-red-500">
                     <small>{errors?.password?.message}</small>
                   </p>
                 )}
-                {errors.password?.type === "minLength" && (
+                {errors?.password?.type === "maxLength" && (
                   <p className="text-red-500">
                     <small>{errors?.password?.message}</small>
                   </p>
@@ -140,7 +141,7 @@ const SingIn = () => {
             <input
               type="submit"
               value=" Sign in"
-              className="text-sm md:text-lg text-white bg-primary px-8 py-2 rounded-md w-full"
+              className="cursor-pointer text-sm md:text-lg text-white bg-primary px-8 py-2 rounded-md w-full"
             />
           </form>
           <div className="flex justify-between items-center">
