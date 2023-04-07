@@ -8,15 +8,16 @@ import { auth } from '../../../firebase.init';
 
 
 const ServiceDetail = () => {
-  const [user]=useAuthState(auth);
-  const [serviceDetail,setServiceDetail]=useState({});
-  const {id}=useParams();
+  const [user]=useAuthState(auth); 
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
   } = useForm();
+  const [serviceDetail,setServiceDetail]=useState({});
+  const {id}=useParams();
+
 
   useEffect(()=>{
     fetch(`http://localhost:5000/services/${id}`)
@@ -28,12 +29,16 @@ const ServiceDetail = () => {
     const fullName = data.fullName;
     const email = data.emailAddress;
     const serviceName = data.serviceName;
+    const price = data.price;
+    const image = data.image;
     const phoneNumber = data.phoneNumber;
     // booking data  
     const bookingData = {
       fullName,
       email,
       serviceName,
+      price,
+      image,
       phoneNumber,
     };  
     // send the data on mongodb
@@ -49,7 +54,7 @@ const ServiceDetail = () => {
         console.log(result);
         if (result.acknowledged) {
           toast.success(`Your ${serviceName} is booked.`);
-          reset();
+          reset()
         } else {
           toast.error(`Your will already booked the ${serviceName} service`);
         }
@@ -69,7 +74,11 @@ const ServiceDetail = () => {
         <div className="flex justify-between items-center">
           <img src={Logo} alt="" className="w-24" />
           <h2 className="text-sm md:text-xl text-primary font-bold ">
-            {serviceDetail.title}
+            <img
+              src={serviceDetail?.image}
+              alt="service_image"
+              className="w-16"
+            />
           </h2>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -140,6 +149,36 @@ const ServiceDetail = () => {
               name="serviceName"
               id="serviceName"
               placeholder="Service Name"
+              className="w-full h-10 px-4 placeholder-black text-sm peer border-b-2 border-accent outline-none"
+            />
+          </div>
+          {/* service image */}
+          <div className="w-full my-5 relative group">
+            <input
+              {...register("image", {
+                required: true,
+              })}
+              value={serviceDetail.image}
+              type="text"
+              readOnly
+              name="image"
+              id="image"
+              placeholder="Service Image"
+              className="w-full h-10 px-4 placeholder-black text-sm peer border-b-2 border-accent outline-none"
+            />
+          </div>
+          {/* Price */}
+          <div className="w-full my-5 relative group">
+            <input
+              {...register("price", {
+                required: true,
+              })}
+              value={serviceDetail.price}
+              type="number"
+              readOnly
+              name="price"
+              id="price"
+              placeholder="Price"
               className="w-full h-10 px-4 placeholder-black text-sm peer border-b-2 border-accent outline-none"
             />
           </div>

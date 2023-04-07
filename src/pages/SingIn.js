@@ -109,7 +109,7 @@ const SingIn = () => {
                   },
                   maxLength: {
                     value: 8,
-                    message: "Minimum length is 8",
+                    message: "Maximum length is 8",
                   },
                 })}
                 autoComplete="off"

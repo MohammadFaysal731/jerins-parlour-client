@@ -1,48 +1,65 @@
 import React from "react";
-
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useForm } from "react-hook-form";
+import Logo from "../../assets/icons/logo.png";
+import { auth } from "../../firebase.init";
 const MakeAdmin = () => {
+  const [user]=useAuthState(auth);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+  const onSubmit = (data) => {
+    const email = data.emailAddress;
+    console.log(email);
+    reset();
+  };
   return (
-    <div>
+    <div className="">
       <h2 className="text-primary text-center font-bold text-sm md:text-lg mb-5">
         Welcome to make admin page
       </h2>
-      <div className="grid grid-cols-1">
-        <div className="overflow-x-auto">
-          <table className="table table-normal w-full">
-            {/* head */}
-            <thead>
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Job</th>
-                <th>Favorite Color</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* row 1 */}
-              <tr>
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>Quality Control Specialist</td>
-                <td>Blue</td>
-              </tr>
-              {/* row 2 */}
-              <tr>
-                <th>2</th>
-                <td>Hart Hagerty</td>
-                <td>Desktop Support Technician</td>
-                <td>Purple</td>
-              </tr>
-              {/* row 3 */}
-              <tr>
-                <th>3</th>
-                <td>Brice Swyre</td>
-                <td>Tax Accountant</td>
-                <td>Red</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <>
+          {/* booking information */}
+          <div className="border p-10">
+            <div className="flex justify-between items-center">
+              <img src={Logo} alt="" className="w-24" />
+              <img src={user?.photoURL} alt="" className="w-14 rounded-full" />
+            </div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              {/* Email Address */}
+              <div className="w-full my-5">
+                <input
+                  {...register("emailAddress", {
+                    required: {
+                      value: true,
+                      message: "Email is required",
+                    },
+                  })}
+                  autoComplete="off"
+                  type="email"
+                  name="emailAddress"
+                  id="email-address"
+                  placeholder=" Email Address"
+                  className="w-full h-10 px-4 placeholder-black text-sm peer border-2 border-accent outline-none"
+                />
+                <label htmlFor="email-address">
+                  {errors.emailAddress?.type === "required" && (
+                    <p className="text-red-500">
+                      <small>{errors.emailAddress?.message}</small>
+                    </p>
+                  )}
+                </label>
+              </div>
+              <button className="btn-xs btn-primary rounded-md text-secondary">
+                Make Admin
+              </button>
+            </form>
+          </div>
+        </>
       </div>
     </div>
   );

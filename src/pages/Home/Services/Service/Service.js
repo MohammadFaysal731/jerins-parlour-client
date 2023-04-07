@@ -16,7 +16,7 @@ const Service = ({ service }) => {
         <img
           src={image}
           alt="service"
-          className="animate-bounce rounded-xl w-20"
+          className="animate-bounce rounded-full w-20"
         />
       </figure>
       <div className="card-body items-center text-center">

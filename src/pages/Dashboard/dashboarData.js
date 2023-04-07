@@ -35,13 +35,13 @@ export const dashboardData = [
     link: "/dashboard/add-service",
   },
   {
-    id: 3,
+    id: 6,
     name: "Make Admin",
     icons: <BiUserPlus />,
     link: "/dashboard/make-admin",
   },
   {
-    id: 3,
+    id: 7,
     name: "Manage Service",
     icons: <CgMenuGridR />,
     link: "/dashboard/manage-service",

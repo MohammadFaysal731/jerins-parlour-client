@@ -36,7 +36,7 @@ const Header = () => {
       {user ? (
         <>
           <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
-            {user.photoURL ? (
+            {user?.photoURL ? (
               <img className="rounded-full w-10" src={user?.photoURL} alt="" />
             ) : (
               <img className="rounded-full w-10" src={User} alt="" />

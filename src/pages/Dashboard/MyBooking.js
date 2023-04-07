@@ -1,44 +1,79 @@
-import React, { useEffect, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import PrimaryButton from '../../components/PrimaryButton';
-import { auth } from '../../firebase.init';
-
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import Logo from '../../assets/icons/logo.png';
+import { auth } from "../../firebase.init";
 const MyBooking = () => {
-  const [myBooking,setMyBooking]=useState([]);
-  const [user]=useAuthState(auth);
-  useEffect(()=>{
-    const email =user?.email
+  const [myBooking, setMyBooking] = useState([]);
+  const [user] = useAuthState(auth);
+  useEffect(() => {
+    const email = user?.email;
     fetch(`http://localhost:5000/booking?email=${email}`)
       .then((res) => res.json())
       .then((data) => setMyBooking(data));
-  },[user])
+  }, [user]);
   return (
     <div className="">
       <h2 className="text-primary text-center font-bold text-sm md:text-lg mb-5">
-        Welcome to booking page
+        Welcome to my booking page
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {myBooking?.map(({ serviceName }, index) => (
-          <div className="card  bg-secondary shadow-xl">
-            <div className="card-body">
-              <h2 className="text-sm md:text-xl">
-                Hello,
-                <span className="text-primary text-sm md:text-xl">
-                  {user?.displayName} {user?.email}
-                </span>
-                .thanks to choose us.
-              </h2>
-              <p className="font-bold text-sm md:text-xl">
-                Please, for your &nbsp;
-                <span className="text-primary text-sm md:text-xl">
-                  {serviceName}
-                </span>
-              </p>
-              <div className="card-actions justify-end btn-xs">
-                <PrimaryButton>Pay Now</PrimaryButton>
+        {myBooking?.map(({ fullName, email, serviceName, price,image }, index) => (
+          <>
+            {/* booking information */}
+            <div className="max-w-lg border p-10" key={index}>
+              <div className="flex justify-between items-center">
+                <img src={Logo} alt="" className="w-24" />
+                <img
+                  src={image}
+                  alt=""
+                  className="w-14 rounded-full"
+                />
               </div>
+              {/* Full Name */}
+              <div className="w-full my-5">
+                <input
+                  autoComplete="off"
+                  value={fullName}
+                  type="text"
+                  name="fullName"
+                  id="full-name"
+                  placeholder="Full Name"
+                  className="w-full h-10 px-4 placeholder-black text-sm peer border-2 border-accent outline-none"
+                />
+              </div>
+              {/* Email Address */}
+              <div className="w-full my-5">
+                <input
+                  autoComplete="off"
+                  value={email}
+                  type="email"
+                  name="emailAddress"
+                  id="email-address"
+                  placeholder=" Email Address"
+                  className="w-full h-10 px-4 placeholder-black text-sm peer border-2 border-accent outline-none"
+                />
+              </div>
+              {/* Service Name */}
+              <div className="w-full my-5">
+                <input
+                  autoComplete="off"
+                  value={serviceName}
+                  type="text"
+                  name="serviceName"
+                  id="service-name"
+                  placeholder=" Service Name"
+                  className="w-full h-10 px-4 placeholder-black text-sm peer border-2 border-accent outline-none"
+                />
+              </div>
+              <p className="font-bold mb-2">
+                Your service charged will be $
+                &nbsp;<span className="text-primary">{price}</span> /-
+              </p>
+              <button className="btn-xs btn-primary rounded-md text-secondary">
+               Pay
+              </button>
             </div>
-          </div>
+          </>
         ))}
       </div>
     </div>

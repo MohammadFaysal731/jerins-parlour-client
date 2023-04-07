@@ -1,18 +1,28 @@
 import React, { useState } from "react";
+import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { BiRightArrow } from "react-icons/bi";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import Logo from "../../assets/icons/loading.png";
+import User from "../../assets/icons/user.jpg";
+import { auth } from "../../firebase.init";
 import { dashboardData } from "./dashboarData";
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
-
+  const [user] = useAuthState(auth);
+  const [signOut] = useSignOut(auth);
+  const navigate=useNavigate();
+  const handleSignOut = () => {
+    signOut();
+    localStorage.removeItem("accessToken");
+    navigate('/sign-in')
+  };
   return (
     <div className="flex">
       {/* left side */}
       <div
         className={`border ${
           open ? "md:w-72" : "w-20"
-        } min-h-screen bg-secondary duration-300`}
+        }  min-h-screen bg-secondary duration-300`}
       >
         <div className="relative">
           {/* logo  */}
@@ -41,7 +51,7 @@ const Dashboard = () => {
         <ul className="mt-5">
           {dashboardData?.map(({ name, icons, link }, index) => (
             <li
-              className={`hover:text-primary flex items-center mx-5 ${
+              className={`flex items-center mx-5 ${
                 open && "me-12"
               } my-5 text-sm md:text-xl font-bold `}
               key={index}
@@ -49,9 +59,16 @@ const Dashboard = () => {
               {/* icons */}
               <div className="">
                 <span className="text-3xl ">
-                  <Link to={link}>
+                  <NavLink
+                    to={link}
+                    style={({ isActive }) => {
+                      return {
+                        color: isActive ? "#F63E7B" : "black",
+                      };
+                    }}
+                  >
                     <small title={name}>{icons}</small>
-                  </Link>
+                  </NavLink>
                 </span>
               </div>
               &nbsp;
@@ -60,9 +77,16 @@ const Dashboard = () => {
                   !open && "scale-0"
                 } `}
               >
-                <Link to={link}>
+                <NavLink
+                  to={link}
+                  style={({ isActive }) => {
+                    return {
+                      color: isActive ? "#F63E7B" : "black",
+                    };
+                  }}
+                >
                   <small>{name}</small>
-                </Link>
+                </NavLink>
               </span>
             </li>
           ))}
@@ -70,10 +94,41 @@ const Dashboard = () => {
       </div>
       {/* right side */}
       <div className="border flex-1 min-h-screen">
-        <nav className="h-[55px] bg-secondary">
+        <nav className="h-[55px] bg-secondary flex justify-between items-center">
           <Link to="/">
             <span className="text-sm md:text-2xl mx-5">Home</span>
           </Link>
+          <ul>
+            <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
+              {user ? (
+                <li className="flex justify-center items-center">
+                  {user?.photoURL ? (
+                    <li>
+                      <img
+                        src={user?.photoURL}
+                        alt=""
+                        className="rounded-full w-10"
+                      />
+                    </li>
+                  ) : (
+                    <li>
+                      <img src={User} alt="" className="rounded-full w-10" />
+                    </li>
+                  )}
+                  <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
+                    <button
+                      onClick={handleSignOut}
+                      className="hover:text-primary mx-2"
+                    >
+                      Sing out
+                    </button>
+                  </li>
+                </li>
+              ) : (
+                ""
+              )}
+            </li>
+          </ul>
         </nav>
         <div className="p-7">
           <Outlet />
