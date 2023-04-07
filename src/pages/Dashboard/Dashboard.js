@@ -50,7 +50,7 @@ const Dashboard = () => {
               <div className="">
                 <span className="text-3xl ">
                   <Link to={link}>
-                    <small>{icons}</small>
+                    <small title={name}>{icons}</small>
                   </Link>
                 </span>
               </div>

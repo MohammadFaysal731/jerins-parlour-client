@@ -26,19 +26,18 @@ const ServiceDetail = () => {
 
   const onSubmit = async (data) => {
     const fullName = data.fullName;
-    const emailAddress = data.emailAddress;
+    const email = data.emailAddress;
     const serviceName = data.serviceName;
     const phoneNumber = data.phoneNumber;
-    reset()
     // booking data  
     const bookingData = {
       fullName,
-      emailAddress,
+      email,
       serviceName,
       phoneNumber,
     };  
     // send the data on mongodb
-    fetch(`http://localhost:5000/booking`, {
+    fetch(`http://localhost:5000/bookings`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -47,11 +46,12 @@ const ServiceDetail = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        if (result.acknowledged){
-          toast.success(`Your ${serviceName} is booked.`)
-        }
-        else{
-          toast.error(`Your ${serviceName} is not booked`)
+        console.log(result);
+        if (result.acknowledged) {
+          toast.success(`Your ${serviceName} is booked.`);
+          reset();
+        } else {
+          toast.error(`Your will already booked the ${serviceName} service`);
         }
       });
   };
@@ -80,7 +80,7 @@ const ServiceDetail = () => {
                 required: {
                   value: true,
                   message: "Full name is required",
-                }
+                },
               })}
               value={user?.displayName}
               readOnly
@@ -142,7 +142,6 @@ const ServiceDetail = () => {
               placeholder="Service Name"
               className="w-full h-10 px-4 placeholder-black text-sm peer border-b-2 border-accent outline-none"
             />
-            
           </div>
           {/* Phone Number */}
           <div className="w-full my-5 relative group">
@@ -165,7 +164,7 @@ const ServiceDetail = () => {
               className="w-full h-10 px-4 placeholder-black text-sm peer border-b-2 border-accent outline-none"
             />
             <label htmlFor="phoneNumber" className="">
-              {errors.phoneNumber?.type === "required" && (
+              {errors?.phoneNumber?.type === "required" && (
                 <p className="text-red-500">
                   <small>{errors?.phoneNumber?.message}</small>
                 </p>
@@ -180,7 +179,7 @@ const ServiceDetail = () => {
           <input
             type="submit"
             value="Submit"
-            className="cursor-pointer text-sm md:text-lg text-white bg-primary px-8 py-2 rounded-md "
+            className={` cursor-pointer  text-white bg-primary px-8 py-2 rounded-md `}
           />
         </form>
       </div>

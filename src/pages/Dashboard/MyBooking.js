@@ -7,10 +7,11 @@ const MyBooking = () => {
   const [myBooking,setMyBooking]=useState([]);
   const [user]=useAuthState(auth);
   useEffect(()=>{
-    fetch(`http://localhost:5000/booking`)
+    const email =user?.email
+    fetch(`http://localhost:5000/booking?email=${email}`)
       .then((res) => res.json())
       .then((data) => setMyBooking(data));
-  },[])
+  },[user])
   return (
     <div className="">
       <h2 className="text-primary text-center font-bold text-sm md:text-lg mb-5">
@@ -23,12 +24,12 @@ const MyBooking = () => {
               <h2 className="text-sm md:text-xl">
                 Hello,
                 <span className="text-primary text-sm md:text-xl">
-                  {user?.displayName}
+                  {user?.displayName} {user?.email}
                 </span>
                 .thanks to choose us.
               </h2>
               <p className="font-bold text-sm md:text-xl">
-                Please,for your
+                Please, for your &nbsp;
                 <span className="text-primary text-sm md:text-xl">
                   {serviceName}
                 </span>
