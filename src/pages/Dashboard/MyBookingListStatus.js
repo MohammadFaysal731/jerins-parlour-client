@@ -7,7 +7,13 @@ const MyBookingList = () => {
    const [myBooking, setMyBooking] = useState([]);
    const [user] = useAuthState(auth);
    useEffect(() => {
-     fetch(`http://localhost:5000/booking`)
+     fetch(`http://localhost:5000/bookings`,{
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
        .then((res) => res.json())
        .then((data) => setMyBooking(data));
    }, []);

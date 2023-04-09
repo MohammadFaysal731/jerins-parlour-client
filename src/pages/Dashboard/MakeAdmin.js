@@ -21,7 +21,7 @@ const MakeAdmin = () => {
       <h2 className="text-primary text-center font-bold text-sm md:text-lg mb-5">
         Welcome to make admin page
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="max-w-3xl mx-auto">
         <>
           {/* booking information */}
           <div className="border p-10">
