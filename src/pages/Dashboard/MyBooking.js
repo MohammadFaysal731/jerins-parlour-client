@@ -40,7 +40,7 @@ const MyBooking = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {myBooking?.map(
           ({ fullName, email, serviceName, price, image }, index) => (
-            <>
+            <div key={index}>
               {/* booking information */}
               <div className="max-w-lg border p-10" key={index}>
                 <div className="flex justify-between items-center">
@@ -91,7 +91,7 @@ const MyBooking = () => {
                   Pay
                 </button>
               </div>
-            </>
+            </div>
           )
         )}
       </div>

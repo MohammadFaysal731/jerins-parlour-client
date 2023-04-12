@@ -8,6 +8,7 @@ import { privateRoutes } from "./routes/privateRoutes";
 import { publicRoutes } from "./routes/publicRoutes";
 
 function App() {
+
   return (
     <div className="select-none">
       <Routes>
@@ -27,7 +28,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}>
           {/* dashboard rotes */}
           {dashboardRoute?.map(({ path, Comment }, index) => (
-            <Route path={path} element={<Comment />} />
+            <Route path={path} element={<Comment />} key={index}/>
           ))}
         </Route>
       </Routes>

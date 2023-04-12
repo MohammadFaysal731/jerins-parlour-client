@@ -72,8 +72,9 @@ const Dashboard = () => {
                 </span>
               </div>
               &nbsp;
+              {/* link text */}
               <span
-                className={`${!open && "hidden"} origin-left duration-300 ${
+                className={`${!open && "hidden"} origin-left duration-500 ${
                   !open && "scale-0"
                 } `}
               >

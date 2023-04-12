@@ -16,7 +16,7 @@ useEffect(()=>{
     })
       .then((res) => res.json())
       .then((data) =>{
-        console.log("data insde userToken",data);
+        // console.log("data insde userToken",data);
         const accessToken = data.token;
         localStorage.setItem("accessToken",accessToken)
         setToken(accessToken);

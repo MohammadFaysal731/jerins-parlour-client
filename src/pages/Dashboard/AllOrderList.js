@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const OrderList = () => {
+const AllOrderList = () => {
   const [allOrders, setAllOrders]=useState([]);
   useEffect(() =>{
     fetch(`http://localhost:5000/bookings`, {
@@ -52,4 +52,4 @@ const OrderList = () => {
   );
 };
 
-export default OrderList;
+export default AllOrderList;

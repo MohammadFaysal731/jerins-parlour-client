@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { useEffect, useState } from "react";
 const ManageServices = () => {
-  const [allService,setAllService]=useState([]);
-  useEffect(()=>{
+  const [allService, setAllService] = useState([]);
+
+  useEffect(() => {
     fetch(`http://localhost:5000/services`)
       .then((res) => res.json())
       .then((data) => setAllService(data));
-  },[])
+  }, []);
   return (
     <div className="">
-      <h2 className="text-primary text-center font-bold text-sm md:text-lg mb-5">
+      <h2 className="text-primary text-center text-sm md:text-lg mb-5 font-bold">
         Welcome to manage services page
       </h2>
       <div className="grid grid-cols-1">
@@ -18,29 +18,35 @@ const ManageServices = () => {
             {/* head */}
             <thead>
               <tr>
-                <th>SL</th>
-                <th>Service Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Image</th>
-                <th>Status</th>
+                <th className="text-primary">SL</th>
+                <th className="text-emerald-500">Service Name</th>
+                <th className="text-sky-500">Description</th>
+                <th className="text-purple-500">Price</th>
+                <th className="">Image</th>
+                <th className="text-green-500">Update</th>
+                <th className="text-red-500">Delete</th>
               </tr>
             </thead>
             <tbody>
-              {/* row 1 */}
               {allService?.map(
                 ({ title, description, price, image }, index) => (
-                  <tr>
-                    <th>{index + 1}</th>
-                    <td>{title}</td>
-                    <td title={description}>{description.slice(0, 20)}</td>
-                    <td>${price} /-</td>
-                    <td>
-                      <img src={image} alt="" className="w-12 rounded-full" />{" "}
+                  <tr className="font-bold">
+                    <th className="text-primary">{index + 1}</th>
+                    <td className="text-emerald-500">{title}</td>
+                    <td className="text-sky-500" title={description}>
+                      {description.slice(0, 20)}
                     </td>
+                    <td className="text-purple-500">${price} /-</td>
                     <td>
-                      Pending
-                      
+                      <img src={image} alt="" className="w-12 rounded-full" />
+                    </td>
+                    <td className="text-green-500">
+                      <button>Update</button>
+                    </td>
+                    <td className="text-red-500">
+                      <button>
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 )

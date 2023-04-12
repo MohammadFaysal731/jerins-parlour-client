@@ -8,10 +8,6 @@ export const headerData = [
     path: "/services",
   },
   {
-    text: "Dashboard",
-    path: "/dashboard/my-booking",
-  },
-  {
     text: "About",
     path: "/about",
   },
@@ -22,5 +18,9 @@ export const headerData = [
   {
     text: "Contact Us",
     path: "/contact-us",
+  },
+  {
+    text: "Dashboard",
+    path: "/dashboard/my-booking",
   },
 ];

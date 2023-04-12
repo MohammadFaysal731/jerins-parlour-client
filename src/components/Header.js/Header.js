@@ -10,13 +10,13 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const [user] = useAuthState(auth);
   const [signOut] = useSignOut(auth);
-  const handleSignOut =()=>{
+  const handleSignOut = () => {
     signOut();
     localStorage.removeItem("accessToken");
-  }
+  };
   const menuItems = (
     <>
-      {headerData?.map(({ text, path }, index) => (
+      {headerData?.slice(0, 5).map(({ text, path }, index) => (
         <li
           className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold"
           key={index}
@@ -33,6 +33,28 @@ const Header = () => {
           </NavLink>
         </li>
       ))}
+      {user && (
+        <>
+          {headerData?.slice(5, 6)?.map(({ text, path }, index) => (
+            <li
+              className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold"
+              key={index}
+            >
+              <NavLink
+                to={path}
+                style={({ isActive }) => {
+                  return {
+                    color: isActive ? "#F63E7B" : "black",
+                  };
+                }}
+              >
+                {text}
+              </NavLink>
+            </li>
+          ))}
+        </>
+      )}
+
       {user ? (
         <>
           <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
@@ -71,9 +93,9 @@ const Header = () => {
           {/* navbar logo and mobile navbar icon start */}
           {/* logo  */}
           <div className="">
-          <Link to="/">
-            <img src={Logo} alt="" className="h-12" />
-          </Link>  
+            <Link to="/">
+              <img src={Logo} alt="" className="h-12" />
+            </Link>
           </div>
           {/* mobile navbar icon */}
           <div className="lg:hidden">
