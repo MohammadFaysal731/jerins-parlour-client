@@ -1,8 +1,8 @@
 import React from "react";
 import { toast } from "react-toastify";
 
-const AllUsersRow = ({ user, index, refetch }) => {
-  const {_id, email, role } = user;
+const AllUsersRow = ({ user, index, refetch, setUserDeleting }) => {
+  const {  email, role } = user;
   const makeAdmin = () => {
     fetch(`http://localhost:5000/user/admin/${email}`, {
       method: "PATCH",
@@ -23,27 +23,27 @@ const AllUsersRow = ({ user, index, refetch }) => {
         }
       });
   };
-const handelDeleteUser = id =>{
-  fetch(`http://localhost:5000/user/${id}`,{
-    method:"DELETE"
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if(data.deletedCount > 0){
-        refetch()
-        toast.success(`successfully delete a user`)
-      }
-    });
-}
+
   return (
     <tr className="font-bold">
       <th className="text-primary">{index + 1}</th>
       <td className="text-sky-500">{email}</td>
       <td className="text-green-500">
-        {role !== "admin" ? <button onClick={makeAdmin}>Make Admin</button>:"Admin"}
+        {role !== "admin" ? (
+          <button onClick={makeAdmin}>Make Admin</button>
+        ) : (
+          "Admin"
+        )}
       </td>
       <td className="text-red-500">
-        <button onClick={()=>handelDeleteUser(_id)}>Remove</button>
+        {/* The button to open modal */}
+        <label
+          onClick={() => setUserDeleting(user)}
+          htmlFor="delete-modal"
+          className="text-red-500"
+        >
+          Delete
+        </label>
       </td>
     </tr>
   );

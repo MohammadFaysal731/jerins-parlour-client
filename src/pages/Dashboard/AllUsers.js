@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import Loading from "../../components/Loading";
+import UserDeleteModal from "../../components/UserDeleteModal";
 import AllUsersRow from "./AllUsersRow";
 
 const AllUsers = () => {
+  const [userDeleting, setUserDeleting] = useState(null);
   const {data:allUsers, isLoading, refetch } = useQuery({
     queryKey: ["allUsers"],
     queryFn: () =>
@@ -37,12 +39,25 @@ if(isLoading){
             </thead>
             <tbody>
               {allUsers?.map((user, index) => (
-                <AllUsersRow key={user._id} user={user} index={index} refetch ={refetch}/>
+                <AllUsersRow
+                  key={user._id}
+                  user={user}
+                  index={index}
+                  refetch={refetch}
+                  setUserDeleting={setUserDeleting}
+                />
               ))}
             </tbody>
           </table>
         </div>
       </div>
+      {userDeleting && (
+        <UserDeleteModal
+          userDeleting={userDeleting}
+          refetch={refetch}
+          setUserDeleting={setUserDeleting}
+        />
+      )}
     </div>
   );
 };

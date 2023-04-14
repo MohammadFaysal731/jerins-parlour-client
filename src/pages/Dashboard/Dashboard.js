@@ -58,8 +58,54 @@ const Dashboard = () => {
         </div>
         {/* dashboard menu items */}
         <ul className="mt-5">
-          {/* normal user */}
-          {!admin && (
+          {/* admin */}
+          {admin ? (
+            <>
+              {dashboardAdminData
+                ?.map(({ name, icons, link }, index) => (
+                  <li
+                    className={`flex items-center mx-5 ${
+                      open && "me-12"
+                    } my-5 text-sm md:text-xl font-bold `}
+                    key={index}
+                  >
+                    {/* icons */}
+                    <div className="">
+                      <span className="text-3xl ">
+                        <NavLink
+                          to={link}
+                          style={({ isActive }) => {
+                            return {
+                              color: isActive ? "#F63E7B" : "black",
+                            };
+                          }}
+                        >
+                          <small title={name}>{icons}</small>
+                        </NavLink>
+                      </span>
+                    </div>
+                    &nbsp;
+                    {/* link text */}
+                    <span
+                      className={`${
+                        !open && "hidden"
+                      } origin-left duration-500 ${!open && "scale-0"} `}
+                    >
+                      <NavLink
+                        to={link}
+                        style={({ isActive }) => {
+                          return {
+                            color: isActive ? "#F63E7B" : "black",
+                          };
+                        }}
+                      >
+                        <small>{name}</small>
+                      </NavLink>
+                    </span>
+                  </li>
+                ))}
+            </>)
+            :(
             <>
               {dashboardPublicData
                 ?.map(({ name, icons, link }, index) => (
@@ -105,55 +151,8 @@ const Dashboard = () => {
                   </li>
                 ))}
             </>
-          )}
-          {/* admin */}
-          {admin && (
-            <>
-              {dashboardAdminData
-                ?.map(({ name, icons, link }, index) => (
-                  <li
-                    className={`flex items-center mx-5 ${
-                      open && "me-12"
-                    } my-5 text-sm md:text-xl font-bold `}
-                    key={index}
-                  >
-                    {/* icons */}
-                    <div className="">
-                      <span className="text-3xl ">
-                        <NavLink
-                          to={link}
-                          style={({ isActive }) => {
-                            return {
-                              color: isActive ? "#F63E7B" : "black",
-                            };
-                          }}
-                        >
-                          <small title={name}>{icons}</small>
-                        </NavLink>
-                      </span>
-                    </div>
-                    &nbsp;
-                    {/* link text */}
-                    <span
-                      className={`${
-                        !open && "hidden"
-                      } origin-left duration-500 ${!open && "scale-0"} `}
-                    >
-                      <NavLink
-                        to={link}
-                        style={({ isActive }) => {
-                          return {
-                            color: isActive ? "#F63E7B" : "black",
-                          };
-                        }}
-                      >
-                        <small>{name}</small>
-                      </NavLink>
-                    </span>
-                  </li>
-                ))}
-            </>
-          )}
+          )
+          }
         </ul>
       </div>
       {/* right side */}
