@@ -5,7 +5,7 @@ import AllUsersRow from "./AllUsersRow";
 
 const AllUsers = () => {
   const {data:allUsers, isLoading, refetch } = useQuery({
-    queryKey: ["repoData"],
+    queryKey: ["allUsers"],
     queryFn: () =>
       fetch("http://localhost:5000/users",{
         method:"GET",
