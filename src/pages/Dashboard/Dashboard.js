@@ -11,7 +11,8 @@ import Logo from "../../assets/icons/loading.png";
 import User from "../../assets/icons/user.jpg";
 import { auth } from "../../firebase.init";
 import useAdmin from "../../hooks/useAdmin";
-import { dashboardData } from "./dashboarData";
+import { dashboardAdminData } from "./dashboardAdminData";
+import { dashboardPublicData } from "./dashboardPublicData";
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
   const [user] = useAuthState(auth);
@@ -60,8 +61,7 @@ const Dashboard = () => {
           {/* normal user */}
           {!admin && (
             <>
-              {dashboardData
-                ?.slice(0, 3)
+              {dashboardPublicData
                 ?.map(({ name, icons, link }, index) => (
                   <li
                     className={`flex items-center mx-5 ${
@@ -109,8 +109,7 @@ const Dashboard = () => {
           {/* admin */}
           {admin && (
             <>
-              {dashboardData
-                ?.slice(3, 7)
+              {dashboardAdminData
                 ?.map(({ name, icons, link }, index) => (
                   <li
                     className={`flex items-center mx-5 ${
