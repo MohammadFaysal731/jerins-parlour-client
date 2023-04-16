@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import Logo from '../../assets/icons/logo.png';
-import { auth } from "../../firebase.init";
+import Logo from "../../../assets/icons/logo.png";
+import { auth } from "../../../firebase.init";
 const MyBooking = () => {
   const [myBooking, setMyBooking] = useState([]);
   const [user] = useAuthState(auth);

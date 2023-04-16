@@ -1,6 +1,6 @@
-import AddReview from "../pages/Dashboard/AddReview";
-import MyBooking from "../pages/Dashboard/MyBooking";
-import MyBookingList from "../pages/Dashboard/MyBookingListStatus";
+import AddReview from "../pages/Dashboard/PublicePages/AddReview";
+import MyBooking from "../pages/Dashboard/PublicePages/MyBooking";
+import MyBookingList from "../pages/Dashboard/PublicePages/MyBookingListStatus";
 
 export const dashboardPublicRoutes =[
   {path:"/dashboard/my-booking",name:"My Booking",Comment:MyBooking},

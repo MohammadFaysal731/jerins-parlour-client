@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import Loading from "../../components/Loading";
-import UserDeleteModal from "../../components/UserDeleteModal";
+import Loading from "../../../../components/Loading";
+import UserDeleteModal from "../../../../components/Modals/UserDeleteModal";
 import AllUsersRow from "./AllUsersRow";
 
 const AllUsers = () => {

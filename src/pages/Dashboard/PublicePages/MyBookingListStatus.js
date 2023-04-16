@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import PrimaryButton from "../../components/PrimaryButton";
-import { auth } from "../../firebase.init";
+import PrimaryButton from "../../../components/PrimaryButton";
+import { auth } from "../../../firebase.init";
 
 const MyBookingList = () => {
    const [myBooking, setMyBooking] = useState([]);

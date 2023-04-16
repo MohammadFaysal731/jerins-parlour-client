@@ -1,7 +1,7 @@
-import AddService from "../pages/Dashboard/AddService";
-import AllOrderList from "../pages/Dashboard/AllOrderList";
-import AllUsers from "../pages/Dashboard/AllUsers";
-import ManageServices from "../pages/Dashboard/ManageServices";
+import AddService from "../pages/Dashboard/AdminPages/AddService";
+import AllOrderList from "../pages/Dashboard/AdminPages/AllOrdersList/AllOrderList";
+import AllUsers from "../pages/Dashboard/AdminPages/AllUser/AllUsers";
+import ManageServices from "../pages/Dashboard/AdminPages/ManageService/ManageServices";
 
 export const dashboardAdminRoutes = [
   {

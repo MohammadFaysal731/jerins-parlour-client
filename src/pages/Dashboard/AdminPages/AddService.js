@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { toast } from "react-toastify";
-import PrimaryButton from "../../components/PrimaryButton";
+import PrimaryButton from "../../../components/PrimaryButton";
 const AddService = () => {
   const {
     register,
@@ -99,7 +99,7 @@ const AddService = () => {
           {/* Service price */}
           <div className="form-control w-full">
             <input
-              type="text"
+              type="number"
               {...register("price", {
                 required: {
                   value: true,

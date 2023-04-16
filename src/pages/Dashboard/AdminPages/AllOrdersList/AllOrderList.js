@@ -16,7 +16,7 @@ const AllOrderList = () => {
   return (
     <div>
       <h2 className="text-primary text-center font-bold text-sm md:text-lg mb-5">
-        Welcome to order list page all orders: {allOrders.length}
+        Welcome to order list page all orders: {allOrders?.length}
       </h2>
       <div className="grid grid-cols-1">
         <div className="overflow-x-auto">

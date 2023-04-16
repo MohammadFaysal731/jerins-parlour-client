@@ -11,8 +11,8 @@ import Logo from "../../assets/icons/loading.png";
 import User from "../../assets/icons/user.jpg";
 import { auth } from "../../firebase.init";
 import useAdmin from "../../hooks/useAdmin";
-import { dashboardAdminData } from "./dashboardAdminData";
-import { dashboardPublicData } from "./dashboardPublicData";
+import { dashboardAdminData } from "./DashboardDatas/dashboardAdminData";
+import { dashboardPublicData } from "./DashboardDatas/dashboardPublicData";
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
   const [user] = useAuthState(auth);

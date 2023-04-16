@@ -12,26 +12,29 @@ const UserDeleteModal = ({ userDeleting, refetch, setUserDeleting }) => {
         if (data.deletedCount > 0) {
           refetch();
           setUserDeleting(null)
-          toast.success(`successfully delete a user`);
+          toast.success(`${email} was deleted`);
         }
       });
   };
   return (
     <div>
       {/* Put this part before </body> tag */}
-      <input type="checkbox" id="delete-modal" className="modal-toggle" />
+      <input type="checkbox" id="user-delete-modal" className="modal-toggle" />
       <div className="modal sm:modal-middle">
-        <div className="modal-box">
+        <div className="modal-box font-bold">
           <label
-            htmlFor="delete-modal"
+            htmlFor="user-delete-modal"
             className="btn btn-primary  btn-sm btn-circle text-secondary absolute right-2 top-2"
           >
             ✕
           </label>
-          <h3 className="text-primary font-bold text-sm md:text-lg">
+          <h3 className="text-primary text-sm md:text-lg">
             Are you sure, you want delete this user :- {email}{" "}
           </h3>
-          <p className="py-4">delete Or cancel</p>
+          <p className="py-4">
+            <span className="text-primary">Select :-</span> Delete{" "}
+            <span className="text-primary">Or</span> Cancel
+          </p>
           <div className="modal-action">
             <button
               onClick={() => handelDeleteUser(email)}
@@ -41,7 +44,7 @@ const UserDeleteModal = ({ userDeleting, refetch, setUserDeleting }) => {
             </button>
 
             <label
-              htmlFor="delete-modal"
+              htmlFor="user-delete-modal"
               className="btn btn-primary btn-xs text-secondary"
             >
               Cancel

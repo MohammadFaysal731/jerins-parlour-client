@@ -39,8 +39,8 @@ const AllUsersRow = ({ user, index, refetch, setUserDeleting }) => {
         {/* The button to open modal */}
         <label
           onClick={() => setUserDeleting(user)}
-          htmlFor="delete-modal"
-          className="text-red-500"
+          htmlFor="user-delete-modal"
+          className="text-red-500 cursor-pointer"
         >
           Delete
         </label>
