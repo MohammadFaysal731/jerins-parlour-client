@@ -22,8 +22,8 @@ if(isLoading){
  
   return (
     <div>
-      <h2 className="text-primary font-bold text-sm md:text-lg mb-5">
-        Welcome to all users page
+      <h2 className="text-center text-primary font-bold text-sm md:text-lg mb-5">
+        Welcome to all users page :- {allUsers?.length}
       </h2>
       <div className="grid grid-cols-1">
         <div className="overflow-x-auto">

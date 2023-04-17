@@ -14,7 +14,7 @@ const ServiceDeleteModal = ({
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         const rest = allService.filter((service) => service._id !== id);
         setAllService(rest);
         setServiceDeleting(null);

@@ -1,6 +1,11 @@
 import React from 'react';
 
-const ManageServiceRow = ({ services, setServiceDeleting, index }) => {
+const ManageServiceRow = ({
+  services,
+  setServiceDeleting,
+  setUpdateService,
+  index,
+}) => {
   const { title, description, price, image } = services;
   return (
     <tr className="font-bold">
@@ -14,14 +19,21 @@ const ManageServiceRow = ({ services, setServiceDeleting, index }) => {
         <img src={image} alt="" className="w-12 rounded-full" />
       </td>
       <td className="text-green-500">
-        <button>Update</button>
+        {/* The button to open modal */}
+        <label
+          onClick={() => setUpdateService(services)}
+          htmlFor="service-update-modal"
+          className="cursor-pointer"
+        >
+          Update
+        </label>
       </td>
       <td className="text-red-500">
         {/* The button to open modal */}
         <label
           onClick={() => setServiceDeleting(services)}
           htmlFor="service-delete-modal"
-          className='cursor-pointer '
+          className="cursor-pointer"
         >
           Delete
         </label>

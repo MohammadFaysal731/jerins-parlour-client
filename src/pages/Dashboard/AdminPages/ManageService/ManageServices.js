@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ServiceDeleteModal from "../../../../components/Modals/ServiceDeleteModal";
+import ServiceUpdateModal from "../../../../components/Modals/ServiceUpdateModal";
 import ManageServiceRow from "./ManageServiceRow";
 const ManageServices = () => {
   const [allService, setAllService] = useState([]);
+  const [updateService, setUpdateService] = useState(null);
   const [serviceDeleting, setServiceDeleting] = useState(null);
   useEffect(() => {
     fetch(`http://localhost:5000/services`)
@@ -10,12 +12,12 @@ const ManageServices = () => {
       .then((data) => {
         setAllService(data);
       });
-  }, []);
+  }, [allService]);
 
   return (
     <div className="">
       <h2 className="text-primary text-center text-sm md:text-lg mb-5 font-bold">
-        Welcome to manage services page
+        Welcome to manage services page :- {allService?.length}
       </h2>
       <div className="grid grid-cols-1">
         <div className="overflow-x-auto">
@@ -39,12 +41,21 @@ const ManageServices = () => {
                   key={services._id}
                   index={index}
                   setServiceDeleting={setServiceDeleting}
+                  setUpdateService={setUpdateService}
                 />
               ))}
             </tbody>
           </table>
         </div>
       </div>
+      {/* update service modal */}
+      {updateService && (
+        <ServiceUpdateModal
+          updateService={updateService}
+          setUpdateService={setUpdateService}
+        />
+      )}
+      {/* service delete modal */}
       {serviceDeleting && (
         <ServiceDeleteModal
           allService={allService}
