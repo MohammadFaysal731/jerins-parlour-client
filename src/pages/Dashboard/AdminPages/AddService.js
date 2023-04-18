@@ -28,7 +28,7 @@ const AddService = () => {
       .then((data) => {
         if (data.success) {
           const image = data.data.url;
-          console.log(image);
+          // console.log(image);
           const serviceData = {
             title,
             price,
@@ -36,23 +36,25 @@ const AddService = () => {
             description,
           };
           // send the data to mongodb
-          fetch(`http://localhost:5000/services`,{
-            method:"POST",
-            headers:{
-              'content-type':"application/json"
+          fetch(`http://localhost:5000/services`, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              "authorization": `Bearer ${localStorage.getItem("accessToken")}`,
             },
-            body:JSON.stringify(serviceData)
+            body: JSON.stringify(serviceData),
           })
-            .then((res) => res.json())
+            .then((res) => {
+              if (res.status === 401 || res.status === 403) {
+                toast.error(`Your ${title} service was not added`);
+              }
+              return res.json();
+            })
             .then((result) => {
-              if (result.acknowledged){
-                toast.success(`You will add ${title} service`)
+              if (result.acknowledged) {
+                toast.success(`You will add ${title} service`);
                 reset();
               }
-              else{
-                toast.error(`Your service was not added`)
-              }
-            
             });
         }
       });
