@@ -55,6 +55,7 @@ const SingIn = () => {
     if (email) {
       sendPasswordResetEmail(email);
       toast.success("Forget email was send. check your mail");
+      reset();
     } else {
      toast.error("Please put your email");
     }
@@ -78,6 +79,7 @@ const SingIn = () => {
                     message: "Email is required",
                   },
                 })}
+                ref={emailRef}
                 autoComplete="off"
                 type="email"
                 name="emailAddress"

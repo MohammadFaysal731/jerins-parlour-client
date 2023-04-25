@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../../assets/icons/logo.png";
 import { auth } from "../../../firebase.init";
 const MyBooking = () => {
@@ -9,10 +9,6 @@ const MyBooking = () => {
   const [user] = useAuthState(auth);
   const [signOut] = useSignOut(auth);
   const navigate =useNavigate();
-
-
-    
-  
   useEffect(() => {
     const email = user?.email;
     fetch(`http://localhost:5000/booking?email=${email}`,{
@@ -39,7 +35,7 @@ const MyBooking = () => {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {myBooking?.map(
-          ({ fullName, email, serviceName, price, image }, index) => (
+          ({_id, fullName, email, serviceName, price, image,paid}, index) => (
             <div key={index}>
               {/* booking information */}
               <div className="max-w-lg border p-10" key={index}>
@@ -87,9 +83,12 @@ const MyBooking = () => {
                   Your service charged will be $ &nbsp;
                   <span className="text-primary">{price}</span> /-
                 </p>
+                {(price &&!paid) && <Link to={`/dashboard/payment/${_id}`}>
                 <button className="btn-xs btn-primary rounded-md text-secondary">
                   Pay
-                </button>
+                </button> 
+                </Link>}
+                {(price && paid) && <span className="text-green-500">paid</span>}
               </div>
             </div>
           )

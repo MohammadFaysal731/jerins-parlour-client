@@ -27,7 +27,7 @@ function App() {
         {/* MainLayout End  */}
         {/* Dashboard  Start*/}
         <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>}>
-          {/* dashboard rotes */}
+          {/* dashboard public rotes */}
           {dashboardPublicRoutes?.map(({ path, Comment }, index) => (
             <Route path={path} element={<Comment />} key={index} />
           ))}
