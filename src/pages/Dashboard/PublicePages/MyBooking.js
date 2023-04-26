@@ -35,7 +35,19 @@ const MyBooking = () => {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {myBooking?.map(
-          ({_id, fullName, email, serviceName, price, image,paid}, index) => (
+          (
+            {
+              _id,
+              fullName,
+              email,
+              serviceName,
+              price,
+              image,
+              paid,
+              transactionId,
+            },
+            index
+          ) => (
             <div key={index}>
               {/* booking information */}
               <div className="max-w-lg border p-10" key={index}>
@@ -83,12 +95,24 @@ const MyBooking = () => {
                   Your service charged will be $ &nbsp;
                   <span className="text-primary">{price}</span> /-
                 </p>
-                {(price &&!paid) && <Link to={`/dashboard/payment/${_id}`}>
-                <button className="btn-xs btn-primary rounded-md text-secondary">
-                  Pay
-                </button> 
-                </Link>}
-                {(price && paid) && <span className="text-green-500">paid</span>}
+                {price && !paid && (
+                  <Link to={`/dashboard/payment/${_id}`}>
+                    <button className="btn-xs btn-primary rounded-md text-secondary">
+                      Pay
+                    </button>
+                  </Link>
+                )}
+                {price && paid && (
+                  <span className="">
+                    <p>
+                      <span className="text-green-500">Paid</span>
+                    </p>
+                    <p>
+                      Transaction Id: -
+                      <span className="text-green-500">{transactionId}</span>
+                    </p>
+                  </span>
+                )}
               </div>
             </div>
           )
