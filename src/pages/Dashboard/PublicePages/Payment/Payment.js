@@ -31,7 +31,6 @@ const Payment = () => {
       <button className="btn-xs btn-primary rounded-md text-secondary">
         <Link to={`/dashboard/my-booking`}>Back</Link>
       </button>
-      {id}
       <div className="card  max-w-md shadow-xl font-bold">
         <div className="card-body">
           <h2 className="card-title">

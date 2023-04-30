@@ -51,7 +51,7 @@ const ServiceDetail = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         if (result.acknowledged) {
           toast.success(`Your ${serviceName} is booked.`);
           reset()

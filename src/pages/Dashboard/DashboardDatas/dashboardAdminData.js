@@ -4,9 +4,9 @@ import { CgMenuGridR } from "react-icons/cg";
 export const dashboardAdminData = [
   {
     id: 1,
-    name: "All order list",
+    name: "All booking list",
     icons: <BsCreditCard2Back />,
-    link: "/dashboard/all-order-list",
+    link: "/dashboard/all-booking-list",
   },
   {
     id: 2,

@@ -1,13 +1,13 @@
 import AddService from "../pages/Dashboard/AdminPages/AddService";
-import AllOrderList from "../pages/Dashboard/AdminPages/AllOrdersList/AllOrderList";
+import AllBookingList from "../pages/Dashboard/AdminPages/AllBookingList/AllBookingList";
 import AllUsers from "../pages/Dashboard/AdminPages/AllUser/AllUsers";
 import ManageServices from "../pages/Dashboard/AdminPages/ManageService/ManageServices";
 
 export const dashboardAdminRoutes = [
   {
-    path: "/dashboard/all-order-list",
-    name: "All Order List",
-    Comment: AllOrderList,
+    path: "/dashboard/all-booking-list",
+    name: "All Booking List",
+    Comment: AllBookingList,
   },
   {
     path: "/dashboard/add-service",

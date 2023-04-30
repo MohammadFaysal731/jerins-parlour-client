@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import LoadingSpinner from "../../../../assets/icons/loading-spinner-image.gif";
 const CheckoutForm = ({ booking }) => {
   const stripe = useStripe();
@@ -9,7 +10,7 @@ const CheckoutForm = ({ booking }) => {
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
   const [clientSecret, setClientSecret] = useState("");
-  const {_id,email,fullName,price}=booking;
+  const { _id, email, fullName, serviceName, price } = booking;
 
   useEffect(() => {
     fetch(`http://localhost:5000/create-payment-intent`,{
@@ -68,7 +69,7 @@ const CheckoutForm = ({ booking }) => {
       else{
         setCardError('');
         setTransactionId(paymentIntent.id)
-        console.log(paymentIntent);
+        // console.log(paymentIntent);
         setSuccess(`Congrats! your payment is completed .`)
         // send payment info on mongodb
         const payment ={
@@ -85,7 +86,9 @@ const CheckoutForm = ({ booking }) => {
           .then((res) => res.json())
           .then((data) => {
             setProcessing(false);
-            console.log(data);
+            if (data.modifiedCount >0){
+              toast.success(`Congrats you will pay for ${serviceName}`);
+            }
           });
       }
   };
