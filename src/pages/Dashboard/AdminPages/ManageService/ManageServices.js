@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Loading from "../../../../components/Loading";
 import ServiceDeleteModal from "../../../../components/Modals/ServiceDeleteModal";
 import ServiceUpdateModal from "../../../../components/Modals/ServiceUpdateModal";
 import ManageServiceRow from "./ManageServiceRow";
@@ -19,14 +20,14 @@ const ManageServices = () => {
       <h2 className="text-primary text-center text-sm md:text-lg mb-5 font-bold">
         Welcome to manage services page :- {allService?.length}
       </h2>
-      <div className="grid grid-cols-1">
+    {!allService?.length ? <Loading/> : <div className="grid grid-cols-1">
         <div className="overflow-x-auto">
           <table className="table table-normal w-full ">
             {/* head */}
             <thead>
               <tr>
                 <th className="text-primary">SL</th>
-                <th className="text-emerald-500">Service Name</th>
+                <th className="text-orange-500">Service Name</th>
                 <th className="text-sky-500">Description</th>
                 <th className="text-purple-500">Price</th>
                 <th className="">Image</th>
@@ -47,7 +48,7 @@ const ManageServices = () => {
             </tbody>
           </table>
         </div>
-      </div>
+      </div>}
       {/* update service modal */}
       {updateService && (
         <ServiceUpdateModal

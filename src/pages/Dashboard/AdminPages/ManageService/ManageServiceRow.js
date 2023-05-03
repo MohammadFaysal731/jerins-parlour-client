@@ -10,7 +10,7 @@ const ManageServiceRow = ({
   return (
     <tr className="font-bold">
       <th className="text-primary">{index + 1}</th>
-      <td className="text-emerald-500">{title}</td>
+      <td className="text-orange-500">{title}</td>
       <td className="text-sky-500" title={description}>
         {description.slice(0, 20)}
       </td>

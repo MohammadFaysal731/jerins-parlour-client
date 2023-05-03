@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import PrimaryButton from "../../../components/PrimaryButton";
 import { auth } from "../../../firebase.init";
 
 const MyBookingList = () => {
    const [myBooking, setMyBooking] = useState([]);
    const [user] = useAuthState(auth);
    useEffect(() => {
-     fetch(`http://localhost:5000/bookings`,{
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    const email = user?.email;
+     fetch(`http://localhost:5000/booking?email=${email}`, {
+       method: "GET",
+       headers: {
+         "content-type": "application/json",
+         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+       },
+     })
        .then((res) => res.json())
        .then((data) => setMyBooking(data));
-   }, []);
+   }, [user]);
   return (
     <div className="">
       <h2 className="text-primary text-center font-bold text-sm md:text-lg mb-5">
@@ -29,7 +29,7 @@ const MyBookingList = () => {
               <h2 className="text-sm md:text-xl">
                 Hello,
                 <span className="text-primary text-sm md:text-xl">
-                  {user?.displayName}
+                  {user?.email}
                 </span>
                 .thanks to choose us.
               </h2>
@@ -40,7 +40,7 @@ const MyBookingList = () => {
                 </span>
               </p>
               <div className="card-actions justify-end btn-xs">
-                <PrimaryButton>Pay Now</PrimaryButton>
+               <button>jlkjkl</button>
               </div>
             </div>
           </div>

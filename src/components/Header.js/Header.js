@@ -87,7 +87,7 @@ const Header = () => {
     </>
   );
   return (
-    <nav className="bg-secondary">
+    <nav className="bg-secondary sticky top-0 z-10">
       <div className="max-w-7xl mx-auto p-3 pb-0 lg:p-0">
         <div className="flex justify-between items-center">
           {/* navbar logo and mobile navbar icon start */}

@@ -146,8 +146,8 @@ const Dashboard = () => {
         </ul>
       </div>
       {/* right side */}
-      <div className="border flex-1 min-h-screen">
-        <nav className="h-[55px] bg-secondary flex justify-between items-center">
+      <div className="border flex-1 min-h-screen ">
+        <nav className="h-[55px] bg-secondary sticky top-0 z-10 flex justify-between items-center">
           <Link to="/">
             <span className="text-sm md:text-2xl mx-5">Home</span>
           </Link>

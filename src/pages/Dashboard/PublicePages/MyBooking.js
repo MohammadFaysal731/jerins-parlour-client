@@ -33,7 +33,7 @@ const MyBooking = () => {
       <h2 className="text-primary text-center font-bold text-sm md:text-lg mb-5">
         Welcome to my booking page
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 gap-5 max-w-7xl mx-auto">
         {myBooking?.map(
           (
             {
@@ -48,15 +48,14 @@ const MyBooking = () => {
             },
             index
           ) => (
-            <div key={index}>
-              {/* booking information */}
-              <div className="max-w-lg border p-10" key={index}>
+            <div className="card  bg-secondary shadow-xl" key={index}>
+              <div className="card-body" key={index}>
                 <div className="flex justify-between items-center">
                   <img src={Logo} alt="" className="w-24" />
                   <img src={image} alt="" className="w-14 rounded-full" />
                 </div>
                 {/* Full Name */}
-                <div className="w-full my-5">
+                <div className="w-full md:my-5">
                   <input
                     autoComplete="off"
                     value={fullName}
@@ -68,7 +67,7 @@ const MyBooking = () => {
                   />
                 </div>
                 {/* Email Address */}
-                <div className="w-full my-5">
+                <div className="w-full md:my-5">
                   <input
                     autoComplete="off"
                     value={email}
@@ -80,7 +79,7 @@ const MyBooking = () => {
                   />
                 </div>
                 {/* Service Name */}
-                <div className="w-full my-5">
+                <div className="w-full md:my-5">
                   <input
                     autoComplete="off"
                     value={serviceName}
@@ -109,7 +108,8 @@ const MyBooking = () => {
                     </p>
                     <p>
                       Transaction Id: -
-                      <span className="text-green-500">{transactionId}</span>
+                      <span className="hidden md:block text-green-500">{transactionId}</span>
+                      <small className="md:hidden text-green-500">{transactionId}</small>
                     </p>
                   </span>
                 )}

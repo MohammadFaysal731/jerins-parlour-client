@@ -43,11 +43,11 @@ const AllBookingList = () => {
       .then((data) => {
         if (data.modifiedCount > 0) {
           refetch();
-          toast.success(`this booking will be ongoing now`);
+          toast.success(`this booking will be on going now`);
         }
       });
   };
-  const handleBookingDoneRemove = (id) => {
+  const handleBookingRemove = (id) => {
     fetch(`http://localhost:5000/booking-remove/${id}`, {
       method: "PATCH",
     })
@@ -59,6 +59,18 @@ const AllBookingList = () => {
         }
       });
   };
+  const handleBookingDelete =id =>{
+    fetch(`http://localhost:5000/booking/${id}`,{
+      method:"DELETE"
+    })
+    .then(res =>res.json())
+    .then(data =>{
+     if (data.deletedCount){
+      refetch();
+      toast.success(`this booking was deleted`)
+     }
+    })
+  }
   return (
     <div>
       <h2 className="text-primary text-center font-bold text-sm md:text-lg mb-5">
@@ -72,18 +84,20 @@ const AllBookingList = () => {
               <tr>
                 <th className="text-primary font-bold ">SL</th>
                 <th className="text-sky-500 font-bold ">Name</th>
-                <th className="text-teal-500  font-bold ">Email ID</th>
+                <th className="text-teal-500  font-bold">Email ID</th>
                 <th className="text-purple-500 font-bold ">Service</th>
+                <th className="text-pink-500 font-bold ">Payment</th>
                 <th className="text-cyan-500 font-bold ">Status</th>
                 <th className="text-orange-500 font-bold ">On Going</th>
                 <th className="text-green-500 font-bold ">Done</th>
+                <th className="text-red-500 font-bold ">Action</th>
               </tr>
             </thead>
             <tbody>
               {/* row 1 */}
               {allBookings?.map(
                 (
-                  { _id, fullName, email, serviceName, bookingStatus },
+                  { _id, fullName, email, serviceName, bookingStatus ,paid,transactionId },
                   index
                 ) => (
                   <tr>
@@ -93,6 +107,8 @@ const AllBookingList = () => {
                     <td className="text-purple-500 font-bold ">
                       {serviceName}
                     </td>
+                    <td className="text-pink-500 font-bold">{paid===true ? "Paid":"Unpaid"}</td>
+                   {paid && <>
                     <td className="text-cyan-500 font-bold">
                       {bookingStatus ? bookingStatus : "Pending"}
                     </td>
@@ -103,8 +119,8 @@ const AllBookingList = () => {
                         <>
                           {bookingStatus === "On Going" ? (
                             <button
-                              className="text-red-500"
-                              onClick={() => handleBookingDoneRemove(_id)}
+                              className="text-green-500"
+                              onClick={() => handleBookingRemove(_id)}
                             >
                               Remove
                             </button>
@@ -123,8 +139,8 @@ const AllBookingList = () => {
                         <>
                           {bookingStatus === "Done" ? (
                             <button
-                              className="text-red-500"
-                              onClick={() => handleBookingDoneRemove(_id)}
+                              className="text-orange-500"
+                              onClick={() => handleBookingRemove(_id)}
                             >
                               Remove
                             </button>
@@ -138,6 +154,11 @@ const AllBookingList = () => {
                           )}
                         </>
                       )}
+                    </td>
+                   </>
+                    }
+                    <td className="text-red-500 font-bold">
+                      <button onClick={()=>handleBookingDelete(_id)}>Delete</button>
                     </td>
                   </tr>
                 )
