@@ -1,8 +1,8 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React from "react";
+import { useForm } from "react-hook-form";
 import { AiOutlineCloudUpload } from "react-icons/ai";
-import { toast } from 'react-toastify';
-const ServiceUpdateModal = ({  updateService, setUpdateService}) => {
+import { toast } from "react-toastify";
+const ServiceUpdateModal = ({ updateService, setUpdateService }) => {
   const { _id, title } = updateService;
   const {
     register,
@@ -41,18 +41,23 @@ const ServiceUpdateModal = ({  updateService, setUpdateService}) => {
             method: "PUT",
             headers: {
               "content-type": "application/json",
+              "authorization":`Bearer ${localStorage.getItem("accessToken")}`
             },
             body: JSON.stringify(updatedServiceData),
           })
-            .then((res) => res.json())
+            .then((res) => {
+              if (res.status === 401 || res.status === 403) {
+                toast.error(`Your service ${title} was not update`);
+              }
+              return res.json();
+            })
             .then((result) => {
               // console.log(result);
               if (result.acknowledged) {
-                  toast.success(`You will update ${title} service`);
-                  reset();
-                  setUpdateService(null);
+                toast.success(`You will update ${title} service`);
+                reset();
+                setUpdateService(null);
               } else {
-                toast.error(`Your service was not added`);
               }
             });
         }

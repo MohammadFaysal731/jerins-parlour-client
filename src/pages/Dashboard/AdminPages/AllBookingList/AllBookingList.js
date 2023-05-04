@@ -26,8 +26,17 @@ const AllBookingList = () => {
   const handleBookingDone = (id) => {
     fetch(`http://localhost:5000/booking-done/${id}`, {
       method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          toast.error(`You do not able to delete this`);
+        }
+        return res.json();
+      })
       .then((data) => {
         if (data.modifiedCount > 0) {
           refetch();
@@ -38,8 +47,17 @@ const AllBookingList = () => {
   const handleBookingOngoing = (id) => {
     fetch(`http://localhost:5000/booking-ongoing/${id}`, {
       method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          toast.error(`You do not able to delete this`);
+        }
+        return res.json();
+      })
       .then((data) => {
         if (data.modifiedCount > 0) {
           refetch();
@@ -50,8 +68,17 @@ const AllBookingList = () => {
   const handleBookingRemove = (id) => {
     fetch(`http://localhost:5000/booking-remove/${id}`, {
       method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          toast.error(`You do not able to delete this`);
+        }
+        return res.json();
+      })
       .then((data) => {
         if (data.modifiedCount > 0) {
           refetch();
@@ -59,18 +86,27 @@ const AllBookingList = () => {
         }
       });
   };
-  const handleBookingDelete =id =>{
-    fetch(`http://localhost:5000/booking/${id}`,{
-      method:"DELETE"
+  const handleBookingDelete = (id) => {
+    fetch(`http://localhost:5000/booking/${id}`, {
+      method: "DELETE",
+      headers:{
+        "content-type":"application/json",
+        "authorization":`Bearer ${localStorage.getItem("accessToken")}`
+      },
     })
-    .then(res =>res.json())
-    .then(data =>{
-     if (data.deletedCount){
-      refetch();
-      toast.success(`this booking was deleted`)
-     }
-    })
-  }
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          toast.error(`You do not able to delete this`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (data.deletedCount) {
+          refetch();
+          toast.success(`this booking was deleted`);
+        }
+      });
+  };
   return (
     <div>
       <h2 className="text-primary text-center font-bold text-sm md:text-lg mb-5">
@@ -97,68 +133,83 @@ const AllBookingList = () => {
               {/* row 1 */}
               {allBookings?.map(
                 (
-                  { _id, fullName, email, serviceName, bookingStatus ,paid,transactionId },
+                  {
+                    _id,
+                    fullName,
+                    email,
+                    serviceName,
+                    bookingStatus,
+                    paid,
+                    transactionId,
+                  },
                   index
                 ) => (
-                  <tr>
+                  <tr key={index}>
                     <th className="text-primary font-bold ">{index + 1}</th>
                     <td className="text-sky-500 font-bold ">{fullName}</td>
                     <td className="text-teal-500 font-bold ">{email}</td>
                     <td className="text-purple-500 font-bold ">
                       {serviceName}
                     </td>
-                    <td className="text-pink-500 font-bold">{paid===true ? "Paid":"Unpaid"}</td>
-                   {paid && <>
-                    <td className="text-cyan-500 font-bold">
-                      {bookingStatus ? bookingStatus : "Pending"}
+                    <td className="text-pink-500 font-bold">
+                      {paid === true ? "Paid" : "Unpaid"}
                     </td>
-                    <td className="text-orange-500 font-bold ">
-                      {bookingStatus === "Done" ? (
-                        ""
-                      ) : (
-                        <>
-                          {bookingStatus === "On Going" ? (
-                            <button
-                              className="text-green-500"
-                              onClick={() => handleBookingRemove(_id)}
-                            >
-                              Remove
-                            </button>
-                          ) : (
-                            <button onClick={() => handleBookingOngoing(_id)}>
-                              On Going
-                            </button>
-                          )}
-                        </>
-                      )}
-                    </td>
-                    <td className="font-bold ">
-                      {bookingStatus === "On Going" ? (
-                        ""
-                      ) : (
-                        <>
+                    {paid && (
+                      <>
+                        <td className="text-cyan-500 font-bold">
+                          {bookingStatus ? bookingStatus : "Pending"}
+                        </td>
+                        <td className="text-orange-500 font-bold ">
                           {bookingStatus === "Done" ? (
-                            <button
-                              className="text-orange-500"
-                              onClick={() => handleBookingRemove(_id)}
-                            >
-                              Remove
-                            </button>
+                            ""
                           ) : (
-                            <button
-                              className="text-green-500"
-                              onClick={() => handleBookingDone(_id)}
-                            >
-                              Done
-                            </button>
+                            <>
+                              {bookingStatus === "On Going" ? (
+                                <button
+                                  className="text-green-500"
+                                  onClick={() => handleBookingRemove(_id)}
+                                >
+                                  Remove
+                                </button>
+                              ) : (
+                                <button
+                                  onClick={() => handleBookingOngoing(_id)}
+                                >
+                                  On Going
+                                </button>
+                              )}
+                            </>
                           )}
-                        </>
-                      )}
-                    </td>
-                   </>
-                    }
+                        </td>
+                        <td className="font-bold ">
+                          {bookingStatus === "On Going" ? (
+                            ""
+                          ) : (
+                            <>
+                              {bookingStatus === "Done" ? (
+                                <button
+                                  className="text-orange-500"
+                                  onClick={() => handleBookingRemove(_id)}
+                                >
+                                  Remove
+                                </button>
+                              ) : (
+                                <button
+                                  className="text-green-500"
+                                  onClick={() => handleBookingDone(_id)}
+                                >
+                                  Done
+                                </button>
+                              )}
+                            </>
+                          )}
+                        </td>
+                      </>
+                    )}
                     <td className="text-red-500 font-bold">
-                      <button onClick={()=>handleBookingDelete(_id)}>Delete</button>
+                      <button onClick={() => handleBookingDelete(_id)}>
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 )

@@ -7,14 +7,20 @@ import rating from "../../assets/icons/rating.png";
 const Testimonials = () => {
     const [reviews, setReviews] = useState([]);
     useEffect(() => {
-      fetch("http://localhost:5000/reviews")
+      fetch("http://localhost:5000/reviews",{
+        method:"GET",
+        headers:{
+          "content-type":"application/json",
+          "authorization":`Bearer ${localStorage.getItem("accessToken")}`
+        },
+      })
         .then((res) => res.json())
         .then((data) => setReviews(data));
     }, []);
   return (
     <div className="max-w-7xl mx-auto mb-5">
       <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center m-10">
-        Testimonials{" "}
+        Testimonials
       </h2>
       <Swiper
         slidesPerView={1}

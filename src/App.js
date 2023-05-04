@@ -29,7 +29,7 @@ function App() {
         <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>}>
           {/* dashboard public rotes */}
           {dashboardPublicRoutes?.map(({ path, Comment }, index) => (
-            <Route path={path} element={<Comment />} key={index} />
+            <Route path={path} element={<RequireAuth><Comment /></RequireAuth>} key={index} />
           ))}
           {/* dashboard admin routes */}
           {dashboardAdminRoutes?.map(({ path, Comment }, index) => (

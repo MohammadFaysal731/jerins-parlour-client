@@ -20,7 +20,13 @@ const ServiceDetail = () => {
 
 
   useEffect(()=>{
-    fetch(`http://localhost:5000/services/${id}`)
+    fetch(`http://localhost:5000/services/${id}`,{
+      method:"GET",
+      headers:{
+        "content-type":"application/json",
+        "authorization":`Bearer ${localStorage.getItem("accessToken")}`
+      },
+    })
       .then((res) => res.json())
       .then((data) => setServiceDetail(data));
   },[id])
@@ -46,6 +52,7 @@ const ServiceDetail = () => {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        "authorization":`Bearer ${localStorage.getItem("accessToken")}`
       },
       body: JSON.stringify(bookingData),
     })

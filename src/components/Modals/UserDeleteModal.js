@@ -6,8 +6,17 @@ const UserDeleteModal = ({ userDeleting, refetch, setUserDeleting }) => {
   const handelDeleteUser = (email) => {
     fetch(`http://localhost:5000/user/${email}`, {
       method: "DELETE",
+      headers:{
+        "content-type":"application/json",
+        "authorization":`Bearer ${localStorage.getItem("accessToken")}`
+      },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if(res.status === 401 || res.status === 403){
+          toast.error(`${email} was not deleted`)
+        }
+        return res.json()
+      })
       .then((data) => {
         if (data.deletedCount > 0) {
           refetch();

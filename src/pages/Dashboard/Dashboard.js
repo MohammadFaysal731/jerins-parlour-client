@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { BiRightArrow } from "react-icons/bi";
-import {
-  Link,
-  NavLink,
-  Outlet,
-  useNavigate
-} from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import Logo from "../../assets/icons/loading.png";
 import User from "../../assets/icons/user.jpg";
 import { auth } from "../../firebase.init";
@@ -19,7 +14,7 @@ const Dashboard = () => {
   const [admin] = useAdmin(user);
   const [signOut] = useSignOut(auth);
   const navigate = useNavigate();
-  const handleSignOut = () => {
+  const handleSignOut = ({ children }) => {
     signOut();
     localStorage.removeItem("accessToken");
     navigate("/sign-in");
@@ -58,16 +53,36 @@ const Dashboard = () => {
         </div>
         {/* dashboard menu items */}
         <ul className="mt-5">
-          {dashboardPublicData?.map(({ name, icons, link }, index) => (
-            <li
-              className={`flex items-center mx-5 ${
-                open && "me-12"
-              } my-5 text-sm md:text-xl font-bold `}
-              key={index}
-            >
-              {/* icons */}
-              <div className="">
-                <span className="text-3xl ">
+          <>
+            {dashboardPublicData?.map(({ name, icons, link }, index) => (
+              <li
+                className={`flex items-center mx-5 ${
+                  open && "me-12"
+                } my-5 text-sm md:text-xl font-bold `}
+                key={index}
+              >
+                {/* icons */}
+                <div className="">
+                  <span className="text-3xl ">
+                    <NavLink
+                      to={link}
+                      style={({ isActive }) => {
+                        return {
+                          color: isActive ? "#F63E7B" : "black",
+                        };
+                      }}
+                    >
+                      <small title={name}>{icons}</small>
+                    </NavLink>
+                  </span>
+                </div>
+                &nbsp;
+                {/* link text */}
+                <span
+                  className={`${!open && "hidden"} origin-left duration-500 ${
+                    !open && "scale-0"
+                  } `}
+                >
                   <NavLink
                     to={link}
                     style={({ isActive }) => {
@@ -76,78 +91,66 @@ const Dashboard = () => {
                       };
                     }}
                   >
-                    <small title={name}>{icons}</small>
+                    <small>{name}</small>
                   </NavLink>
                 </span>
-              </div>
-              &nbsp;
-              {/* link text */}
-              <span
-                className={`${!open && "hidden"} origin-left duration-500 ${
-                  !open && "scale-0"
-                } `}
-              >
-                <NavLink
-                  to={link}
-                  style={({ isActive }) => {
-                    return {
-                      color: isActive ? "#F63E7B" : "black",
-                    };
-                  }}
-                >
-                  <small>{name}</small>
-                </NavLink>
-              </span>
-            </li>
-          ))}
+              </li>
+            ))}
+          </>
           {/* admin */}
-          {dashboardAdminData?.map(({ name, icons, link }, index) => (
-            <li
-              className={`flex items-center mx-5 ${
-                open && "me-12"
-              } my-5 text-sm md:text-xl font-bold `}
-              key={index}
-            >
-              {/* icons */}
-              <div className="">
-                <span className="text-3xl ">
-                  <NavLink
-                    to={link}
-                    style={({ isActive }) => {
-                      return {
-                        color: isActive ? "#F63E7B" : "black",
-                      };
-                    }}
-                  >
-                    <small title={name}>{icons}</small>
-                  </NavLink>
-                </span>
-              </div>
-              &nbsp;
-              {/* link text */}
-              <span
-                className={`${!open && "hidden"} origin-left duration-500 ${
-                  !open && "scale-0"
-                } `}
-              >
-                <NavLink
-                  to={link}
-                  style={({ isActive }) => {
-                    return {
-                      color: isActive ? "#F63E7B" : "black",
-                    };
-                  }}
+          {admin && (
+            <>
+              {dashboardAdminData?.map(({ name, icons, link }, index) => (
+                <li
+                  className={`flex items-center mx-5 ${
+                    open && "me-12"
+                  } my-5 text-sm md:text-xl font-bold `}
+                  key={index}
                 >
-                  <small>{name}</small>
-                </NavLink>
-              </span>
-            </li>
-          ))}
+                  {/* icons */}
+                  <div className="">
+                    <span className="text-3xl ">
+                      <NavLink
+                        to={link}
+                        style={({ isActive }) => {
+                          return {
+                            color: isActive ? "#F63E7B" : "black",
+                          };
+                        }}
+                      >
+                        <small title={name}>{icons}</small>
+                      </NavLink>
+                    </span>
+                  </div>
+                  &nbsp;
+                  {/* link text */}
+                  <span
+                    className={`${!open && "hidden"} origin-left duration-500 ${
+                      !open && "scale-0"
+                    } `}
+                  >
+                    <NavLink
+                      to={link}
+                      style={({ isActive }) => {
+                        return {
+                          color: isActive ? "#F63E7B" : "black",
+                        };
+                      }}
+                    >
+                      <small>{name}</small>
+                    </NavLink>
+                  </span>
+                </li>
+              ))}
+            </>
+          )}
         </ul>
       </div>
+      
       {/* right side */}
-      <div className="border flex-1 min-h-screen ">
-        <nav className="h-[55px] bg-secondary sticky top-0 z-10 flex justify-between items-center">
+      <div className="border flex-1">
+        {/* main part   */}
+        <nav className="h-[55px] bg-secondary  flex justify-between items-center">
           <Link to="/">
             <span className="text-sm md:text-2xl mx-5">Home</span>
           </Link>
@@ -182,11 +185,11 @@ const Dashboard = () => {
               )}
             </li>
           </ul>
+        
         </nav>
+
+        {/* children */}
         <div className="p-7">
-          <marquee>
-            Welcome to dashboard page. this page info coming soon
-          </marquee>
           <Outlet />
         </div>
       </div>

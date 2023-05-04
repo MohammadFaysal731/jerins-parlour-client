@@ -21,6 +21,6 @@ export const headerData = [
   },
   {
     text: "Dashboard",
-    path: "/dashboard",
+    path: "/dashboard/my-booking",
   },
 ];

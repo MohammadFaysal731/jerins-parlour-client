@@ -7,6 +7,7 @@ const AllUsersRow = ({ user, index, refetch, setUserDeleting }) => {
     fetch(`http://localhost:5000/user/admin/${email}`, {
       method: "PATCH",
       headers: {
+        "content-type":"application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })

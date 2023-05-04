@@ -11,14 +11,24 @@ const ServiceDeleteModal = ({
   const handleDeleteService = (id) => {
     fetch(`http://localhost:5000/services/${id}`, {
       method: "DELETE",
+      headers:{
+        "content-type":"application/json",
+        "authorization":`Bearer ${localStorage.getItem("accessToken")}`
+      },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if(res.status===401 || res.status===403){
+          toast.error(`${title} was not deleted`)
+        }
+      return  res.json()
+      })
       .then((data) => {
-        // console.log(data);
-        const rest = allService.filter((service) => service._id !== id);
+        if(data.deletedCount > 0){
+           const rest = allService.filter((service) => service._id !== id);
         setAllService(rest);
         setServiceDeleting(null);
         toast.success(`${title} was deleted`)
+        }
       });
   };
   return (

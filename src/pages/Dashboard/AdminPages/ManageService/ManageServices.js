@@ -8,7 +8,13 @@ const ManageServices = () => {
   const [updateService, setUpdateService] = useState(null);
   const [serviceDeleting, setServiceDeleting] = useState(null);
   useEffect(() => {
-    fetch(`http://localhost:5000/services`)
+    fetch(`http://localhost:5000/services`,{
+      method:"GET",
+      headers:{
+        "content-type":"application/json",
+        "authorization":`Bearer ${localStorage.getItem("accessToken")}`
+      }
+    })
       .then((res) => res.json())
       .then((data) => {
         setAllService(data);
