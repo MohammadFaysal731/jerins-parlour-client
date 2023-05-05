@@ -18,18 +18,20 @@ const OurTeam = () => {
   }, []);
   return (
     <div className="p-10 max-w-7xl mx-auto">
-      <h2 className="text-sm md:text-xl lg:text-2xl text-center text-primary font-bold">
+      <h2 className="text-sm md:text-xl lg:text-2xl text-center text-primary font-bold mb-5">
         Our Teams
       </h2>
       {teamMembers?.length ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {teamMembers?.map(({ _id,name, img }) => (
-            <div className="card max-w-lg "key={_id}>
-              <figure className="px-10 pt-10">
-                <img src={img} alt="Shoes" className="rounded-xl w-40" />
-              </figure>
+          {teamMembers?.map(({ _id, name, image }) => (
+            <div className="card max-w-lg " key={_id}>
+              <div class="avatar">
+                <div class=" mask mask-hexagon">
+                  <img src={image} alt={name} className="rounded-xl w-40" />
+                </div>
+              </div>
               <div className="card-body items-center text-center">
-                <h2 className="card-title">{name}</h2>
+                <h2 className="text-sm md:text-xl lg:text-2xl text-primary font-bold">{name}</h2>
               </div>
             </div>
           ))}
