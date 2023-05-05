@@ -3,7 +3,9 @@ import { useForm } from "react-hook-form";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { toast } from "react-toastify";
 import PrimaryButton from "../../../components/PrimaryButton";
+import useTitle from "../../../hooks/useTitle";
 const AddReview = () => {
+  useTitle("Add Review")
   const {
     register,
     handleSubmit,

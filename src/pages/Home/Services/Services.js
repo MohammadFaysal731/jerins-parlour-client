@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../../../components/Loading";
+import useTitle from "../../../hooks/useTitle";
 import Service from "./Service/Service";
 const Services = () => {
+   useTitle("Services");
   const [services, setServices] = useState([]);
   useEffect(() => {
     fetch("https://concerned-colt-skirt.cyclic.app/services", {

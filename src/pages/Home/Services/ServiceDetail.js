@@ -5,8 +5,10 @@ import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Logo from "../../../assets/icons/logo.png";
 import { auth } from "../../../firebase.init";
+import useTitle from "../../../hooks/useTitle";
 
 const ServiceDetail = () => {
+  useTitle("Service Detail")
   const [user] = useAuthState(auth);
   const {
     register,

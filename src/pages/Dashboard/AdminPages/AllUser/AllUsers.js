@@ -2,9 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import Loading from "../../../../components/Loading";
 import UserDeleteModal from "../../../../components/Modals/UserDeleteModal";
+import useTitle from "../../../../hooks/useTitle";
 import AllUsersRow from "./AllUsersRow";
 
 const AllUsers = () => {
+  useTitle("All Users")
   const [userDeleting, setUserDeleting] = useState(null);
   const {data:allUsers, isLoading, refetch } = useQuery({
     queryKey: ["allUsers"],

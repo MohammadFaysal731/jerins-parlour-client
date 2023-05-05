@@ -1,8 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import PrimaryButton from "../components/PrimaryButton";
+import useTitle from "../hooks/useTitle";
 
 const ContactUs = () => {
+  useTitle("Contact us")
   const {
     register,
     handleSubmit,

@@ -6,9 +6,11 @@ import Logo from "../../assets/icons/loading.png";
 import User from "../../assets/icons/user.jpg";
 import { auth } from "../../firebase.init";
 import useAdmin from "../../hooks/useAdmin";
+import useTitle from "../../hooks/useTitle";
 import { dashboardAdminData } from "./DashboardDatas/dashboardAdminData";
 import { dashboardPublicData } from "./DashboardDatas/dashboardPublicData";
 const Dashboard = () => {
+  useTitle("Dashboard")
   const [open, setOpen] = useState(true);
   const [user] = useAuthState(auth);
   const [admin] = useAdmin(user);

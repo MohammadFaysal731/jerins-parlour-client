@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Loading from "../../../../components/Loading";
 import ServiceDeleteModal from "../../../../components/Modals/ServiceDeleteModal";
 import ServiceUpdateModal from "../../../../components/Modals/ServiceUpdateModal";
+import useTitle from "../../../../hooks/useTitle";
 import ManageServiceRow from "./ManageServiceRow";
 const ManageServices = () => {
+  useTitle("Mange Service")
   const [allService, setAllService] = useState([]);
   const [updateService, setUpdateService] = useState(null);
   const [serviceDeleting, setServiceDeleting] = useState(null);

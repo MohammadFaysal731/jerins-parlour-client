@@ -4,7 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../../assets/icons/logo.png";
 import Loading from "../../../components/Loading";
 import { auth } from "../../../firebase.init";
+import useTitle from "../../../hooks/useTitle";
 const MyBooking = () => {
+  useTitle("My Booking");
   const [myBooking, setMyBooking] = useState([]);
   const [user] = useAuthState(auth);
   const [signOut] = useSignOut(auth);

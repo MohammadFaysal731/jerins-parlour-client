@@ -16,7 +16,7 @@ export const headerData = [
     path: "/our-team",
   },
   {
-    text: "Contact Us",
+    text: "Contact us",
     path: "/contact-us",
   },
   {

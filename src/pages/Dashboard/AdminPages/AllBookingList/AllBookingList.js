@@ -2,7 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { toast } from "react-toastify";
 import Loading from "../../../../components/Loading";
+import useTitle from "../../../../hooks/useTitle";
 const AllBookingList = () => {
+  useTitle("All Booking List");
   const {
     isLoading,
     data: allBookings,

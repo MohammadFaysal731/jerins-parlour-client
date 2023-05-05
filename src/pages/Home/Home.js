@@ -6,8 +6,10 @@ import Banner from './Banner';
 import ScreenCare from './ScreenCare';
 import Services from './Services/Services';
 import Testimonials from './Testimonials';
+import useTitle from '../../hooks/useTitle';
 
 const Home = () => {
+  useTitle("Home")
   return (
     <div>
       <Banner />

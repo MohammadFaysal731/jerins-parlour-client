@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../components/Loading";
+import useTitle from "../hooks/useTitle";
 
 const OurTeam = () => {
+  useTitle("Our Team")
   const [teamMembers, setTeamMembers] = useState([]);
   useEffect(() => {
     fetch("https://concerned-colt-skirt.cyclic.app/team-members", {

@@ -9,8 +9,10 @@ import Logo from "../assets/icons/logo.png";
 import Loading from "../components/Loading";
 import SocialSignIn from "../components/SocialSignIn";
 import { auth } from "../firebase.init";
+import useTitle from "../hooks/useTitle";
 import useToken from "../hooks/useToken";
 const SingUp = () => {
+  useTitle("Sing up")
   const [
     createUserWithEmailAndPassword,
     emailUser,
