@@ -1,11 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import {
   useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import logo from "../assets/icons/logo.png";
 import Loading from "../components/Loading";
 import SocialSignIn from "../components/SocialSignIn";
@@ -17,8 +16,8 @@ const SingIn = () => {
     useSignInWithEmailAndPassword(auth);
   const [sendPasswordResetEmail, resetSending, resetError] =
     useSendPasswordResetEmail(auth);
-  const [token] = useToken(emailUser); 
-  const emailRef = useRef("");
+  const [token] = useToken(emailUser);
+
   const {
     register,
     formState: { errors },
@@ -50,16 +49,20 @@ const SingIn = () => {
     signInWithEmailAndPassword(email, password);
     reset();
   };
-  const handleForgetPassword = () => {
-    const email = emailRef.current.value;
-    if (email) {
-      sendPasswordResetEmail(email);
-      toast.success("Forget email was send. check your mail");
-      reset();
-    } else {
-     toast.error("Please put your email");
-    }
-  };
+  
+  
+
+  // const handleForgetPassword = async e => {
+  //   const forgetEmailSend = e.target.emailAddress?.value;
+  //   console.log(forgetEmailSend);
+  //   if (forgetEmailSend) {
+  //    await  sendPasswordResetEmail(forgetEmailSend);
+  //     toast.success("Forget email was send. check your mail");
+  //     reset();
+  //   } else {
+  //     toast.error("Please put your email");
+  //   }
+  // };
 
   return (
     <div className="p-6">
@@ -79,7 +82,6 @@ const SingIn = () => {
                     message: "Email is required",
                   },
                 })}
-                ref={emailRef}
                 autoComplete="off"
                 type="email"
                 name="emailAddress"
@@ -153,12 +155,12 @@ const SingIn = () => {
                 <Link to="/sing-up">Create an account</Link>
               </span>
             </p>
-            <button
-              onClick={handleForgetPassword}
+            {/* <button
+              // onClick={handleForgetPassword}
               className="m-2 text-sm md:text-lg whitespace-nowrap text-primary underline"
             >
               Forget Password
-            </button>
+            </button> */}
           </div>
         </div>
         <SocialSignIn />

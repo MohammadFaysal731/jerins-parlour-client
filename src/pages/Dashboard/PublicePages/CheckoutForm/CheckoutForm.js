@@ -80,10 +80,16 @@ const CheckoutForm = ({ booking }) => {
           method: "PATCH",
           headers: {
             "content-type": "application/json",
+            "authorization":`Bearer ${localStorage.getItem("accessToken")}`
           },
           body: JSON.stringify(payment),
         })
-          .then((res) => res.json())
+          .then((res) =>{
+           if(res.status ===401 || res.status ===403){
+            toast.error(`your payment was not success`)
+           }
+            return res.json();
+          })
           .then((data) => {
             setProcessing(false);
             if (data.modifiedCount >0){

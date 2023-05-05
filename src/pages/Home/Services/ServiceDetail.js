@@ -1,35 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useForm } from 'react-hook-form';
-import { Link, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useForm } from "react-hook-form";
+import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import Logo from "../../../assets/icons/logo.png";
-import { auth } from '../../../firebase.init';
-
+import { auth } from "../../../firebase.init";
 
 const ServiceDetail = () => {
-  const [user]=useAuthState(auth); 
+  const [user] = useAuthState(auth);
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
   } = useForm();
-  const [serviceDetail,setServiceDetail]=useState({});
-  const {id}=useParams();
+  const [serviceDetail, setServiceDetail] = useState({});
+  const { id } = useParams();
 
-
-  useEffect(()=>{
-    fetch(`http://localhost:5000/services/${id}`,{
-      method:"GET",
-      headers:{
-        "content-type":"application/json",
-        "authorization":`Bearer ${localStorage.getItem("accessToken")}`
+  useEffect(() => {
+    fetch(`http://localhost:5000/services/${id}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
       .then((res) => res.json())
       .then((data) => setServiceDetail(data));
-  },[id])
+  }, [id]);
 
   const onSubmit = async (data) => {
     const fullName = data.fullName;
@@ -38,7 +36,7 @@ const ServiceDetail = () => {
     const price = data.price;
     const image = data.image;
     const phoneNumber = data.phoneNumber;
-    // booking data  
+    // booking data
     const bookingData = {
       fullName,
       email,
@@ -46,24 +44,27 @@ const ServiceDetail = () => {
       price,
       image,
       phoneNumber,
-    };  
+    };
     // send the data on mongodb
     fetch(`http://localhost:5000/bookings`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "authorization":`Bearer ${localStorage.getItem("accessToken")}`
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify(bookingData),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          toast.error(`Failed to booking this ${serviceName}`);
+        }
+        return res.json();
+      })
       .then((result) => {
         // console.log(result);
-        if (result.acknowledged) {
+        if (result.acknowledged > 0) {
           toast.success(`Your ${serviceName} is booked.`);
-          reset()
-        } else {
-          toast.error(`Your will already booked the ${serviceName} service`);
+          reset();
         }
       });
   };
