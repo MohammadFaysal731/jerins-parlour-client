@@ -1,6 +1,6 @@
 # Jerins Palour
 
-## [Jerins Palour](https://jerins-palour-bc261.web.app/our-team).
+## [Jerins Palour](https://jerins-palour-bc261.web.app/our-team)
 
 ## Website Detail
 
@@ -20,6 +20,6 @@ This website has different types of features such as:-
 ### Technology used
 
 ```
-react, react-router-dom, react-icons, tailwindCss, daisyUi, swiperjs, react-countUp, react-scroll-trigger,  react-hook-form, firebase, react-firebase-hooks, react-toastify,tanstack query, react-stripe-js .
+react, react-router-dom, react-icons, tailwindCss, daisyUi, swiperjs, react-countUp, react-scroll-trigger,  react-hook-form, firebase, react-firebase-hooks, react-toastify, react-tanStack ,google font, query, node, nodemon, dotenv, express, mongodb, stripe.
 
 ```
