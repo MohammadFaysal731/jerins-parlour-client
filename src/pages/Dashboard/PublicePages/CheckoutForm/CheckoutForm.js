@@ -13,7 +13,7 @@ const CheckoutForm = ({ booking }) => {
   const { _id, email, fullName, serviceName, price } = booking;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/create-payment-intent`,{
+    fetch(`https://concerned-colt-skirt.cyclic.app/create-payment-intent`,{
       method:"POST",
       headers:{
         "content-type":"application/json"
@@ -76,7 +76,7 @@ const CheckoutForm = ({ booking }) => {
           booking: _id,
           transactionId: paymentIntent.id,
         }
-        fetch(`http://localhost:5000/booking/${_id}`, {
+        fetch(`https://concerned-colt-skirt.cyclic.app/booking/${_id}`, {
           method: "PATCH",
           headers: {
             "content-type": "application/json",

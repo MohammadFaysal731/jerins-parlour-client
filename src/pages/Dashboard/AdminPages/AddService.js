@@ -36,7 +36,7 @@ const AddService = () => {
             description,
           };
           // send the data to mongodb
-          fetch(`http://localhost:5000/services`, {
+          fetch(`https://concerned-colt-skirt.cyclic.app/services`, {
             method: "POST",
             headers: {
               "content-type": "application/json",

@@ -18,7 +18,7 @@ const ServiceDetail = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/services/${id}`, {
+    fetch(`https://concerned-colt-skirt.cyclic.app/services/${id}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -46,7 +46,7 @@ const ServiceDetail = () => {
       phoneNumber,
     };
     // send the data on mongodb
-    fetch(`http://localhost:5000/bookings`, {
+    fetch(`https://concerned-colt-skirt.cyclic.app/bookings`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

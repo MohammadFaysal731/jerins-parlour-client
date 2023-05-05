@@ -7,7 +7,7 @@ import rating from "../../assets/icons/rating.png";
 const Testimonials = () => {
     const [reviews, setReviews] = useState([]);
     useEffect(() => {
-      fetch("http://localhost:5000/reviews",{
+      fetch("https://concerned-colt-skirt.cyclic.app/reviews",{
         method:"GET",
         headers:{
           "content-type":"application/json",
@@ -50,8 +50,8 @@ const Testimonials = () => {
         className="p-5 cursor-pointer"
       >
         {reviews?.map(
-          ({ image, name, company, description, ratings }, index) => (
-            <SwiperSlide className="mb-5 " key={index}>
+          ({_id, image, name, company, description, ratings }) => (
+            <SwiperSlide className="mb-5 " key={_id}>
               <div className="hover:border hover:transition-all duration-300 delay-100 p-5 w-96 ">
                 <div className="flex items-center">
                   {/* images  */}
@@ -70,12 +70,12 @@ const Testimonials = () => {
                 </div>
                 <div className="">
                   <h3 className="m-2">{description}</h3>
-                  <div className="flex mt-3" key={index}>
-                    <img src={rating} alt="" className="w-6 mx-1" key={index} />
-                    <img src={rating} alt="" className="w-6 mx-1" key={index} />
-                    <img src={rating} alt="" className="w-6 mx-1" key={index} />
-                    <img src={rating} alt="" className="w-6 mx-1" key={index} />
-                    <img src={rating} alt="" className="w-6 mx-1" key={index} />
+                  <div className="flex mt-3">
+                    <img src={rating} alt="" className="w-6 mx-1" />
+                    <img src={rating} alt="" className="w-6 mx-1" />
+                    <img src={rating} alt="" className="w-6 mx-1" />
+                    <img src={rating} alt="" className="w-6 mx-1" />
+                    <img src={rating} alt="" className="w-6 mx-1" />
                   </div>
                 </div>
               </div>

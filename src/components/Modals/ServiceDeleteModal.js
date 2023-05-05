@@ -9,7 +9,7 @@ const ServiceDeleteModal = ({
 }) => {
   const { _id, title } = serviceDeleting;
   const handleDeleteService = (id) => {
-    fetch(`http://localhost:5000/services/${id}`, {
+    fetch(`https://concerned-colt-skirt.cyclic.app/services/${id}`, {
       method: "DELETE",
       headers:{
         "content-type":"application/json",

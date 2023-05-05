@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../../../components/Loading";
-import PrimaryButton from "../../../components/PrimaryButton";
 import Service from "./Service/Service";
 const Services = () => {
   const [services, setServices] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/services", {
+    fetch("https://concerned-colt-skirt.cyclic.app/services", {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -23,13 +22,13 @@ const Services = () => {
       {services.length ? (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {services?.map((service, index) => (
-              <Service service={service} key={index} />
+            {services?.map((service) => (
+              <Service service={service} key={service._id} />
             ))}
           </div>
-          <div className="text-center m-5">
+          {/* <div className="text-center m-5">
             <PrimaryButton>Explore more</PrimaryButton>
-          </div>
+          </div> */}
         </>
       ) : (
         <Loading />

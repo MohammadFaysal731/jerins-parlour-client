@@ -4,7 +4,7 @@ import Loading from "../components/Loading";
 const OurTeam = () => {
   const [teamMembers, setTeamMembers] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/team-members", {
+    fetch("https://concerned-colt-skirt.cyclic.app/team-members", {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -21,8 +21,8 @@ const OurTeam = () => {
       </h2>
       {teamMembers?.length ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {teamMembers?.map(({ name, img }, index) => (
-            <div className="card max-w-lg ">
+          {teamMembers?.map(({ _id,name, img }) => (
+            <div className="card max-w-lg "key={_id}>
               <figure className="px-10 pt-10">
                 <img src={img} alt="Shoes" className="rounded-xl w-40" />
               </figure>

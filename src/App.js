@@ -16,23 +16,50 @@ function App() {
         {/* ManLayout Start */}
         <Route path="/" element={<MainLayout />}>
           {/* public routes */}
-          {publicRoutes?.map(({ path, Comment }, index) => (
-            <Route path={path} element={<Comment />} key={index} />
+          {publicRoutes?.map(({path,Comment},index) => (
+            <Route
+              path={path}
+              element={<Comment />}
+              key={index}
+            />
           ))}
           {/* private routes */}
-            {privateRoutes?.map(({ path, Comment }, index) => (
-              <Route path={path} element={<RequireAuth><Comment /></RequireAuth>} key={index} />
-            ))}
+          {privateRoutes?.map(({path,Comment},index) => (
+            <Route
+              path={path}
+              element={
+                <RequireAuth>
+                  <Comment />
+                </RequireAuth>
+              }
+              key={index}
+            />
+          ))}
         </Route>
         {/* MainLayout End  */}
         {/* Dashboard  Start*/}
-        <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>}>
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        >
           {/* dashboard public rotes */}
-          {dashboardPublicRoutes?.map(({ path, Comment }, index) => (
-            <Route path={path} element={<RequireAuth><Comment /></RequireAuth>} key={index} />
+          {dashboardPublicRoutes?.map(({path,Comment},index) => (
+            <Route
+              path={path}
+              element={
+                <RequireAuth>
+                  <Comment />
+                </RequireAuth>
+              }
+              key={index}
+            />
           ))}
           {/* dashboard admin routes */}
-          {dashboardAdminRoutes?.map(({ path, Comment }, index) => (
+          {dashboardAdminRoutes?.map(({path,Comment},index) => (
             <Route
               path={path}
               element={

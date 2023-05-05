@@ -8,7 +8,7 @@ const ManageServices = () => {
   const [updateService, setUpdateService] = useState(null);
   const [serviceDeleting, setServiceDeleting] = useState(null);
   useEffect(() => {
-    fetch(`http://localhost:5000/services`,{
+    fetch(`https://concerned-colt-skirt.cyclic.app/services`,{
       method:"GET",
       headers:{
         "content-type":"application/json",

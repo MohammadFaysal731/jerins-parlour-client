@@ -157,29 +157,29 @@ const Dashboard = () => {
           <ul>
             <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
               {user ? (
-                <li className="flex justify-center items-center">
+                <span className="flex justify-center items-center">
                   {user?.photoURL ? (
-                    <li>
+                    <span>
                       <img
                         src={user?.photoURL}
                         alt=""
                         className="rounded-full w-10"
                       />
-                    </li>
+                    </span>
                   ) : (
-                    <li>
+                    <span>
                       <img src={User} alt="" className="rounded-full w-10" />
-                    </li>
+                    </span>
                   )}
-                  <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
+                  <span className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
                     <button
                       onClick={handleSignOut}
                       className="hover:text-primary mx-2"
                     >
                       Sing out
                     </button>
-                  </li>
-                </li>
+                  </span>
+                </span>
               ) : (
                 ""
               )}

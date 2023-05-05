@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 const UserDeleteModal = ({ userDeleting, refetch, setUserDeleting }) => {
   const { email } = userDeleting;
   const handelDeleteUser = (email) => {
-    fetch(`http://localhost:5000/user/${email}`, {
+    fetch(`https://concerned-colt-skirt.cyclic.app/user/${email}`, {
       method: "DELETE",
       headers:{
         "content-type":"application/json",

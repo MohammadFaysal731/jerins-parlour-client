@@ -8,7 +8,7 @@ const MyBookingList = () => {
   const [user] = useAuthState(auth);
   useEffect(() => {
     const email = user?.email;
-    fetch(`http://localhost:5000/booking?email=${email}`, {
+    fetch(`https://concerned-colt-skirt.cyclic.app/booking?email=${email}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",

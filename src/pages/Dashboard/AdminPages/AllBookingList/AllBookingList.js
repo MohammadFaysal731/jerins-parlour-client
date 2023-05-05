@@ -10,7 +10,7 @@ const AllBookingList = () => {
   } = useQuery({
     queryKey: ["allBookings"],
     queryFn: () =>
-      fetch(`http://localhost:5000/bookings`, {
+      fetch(`https://concerned-colt-skirt.cyclic.app/bookings`, {
         method: "GET",
         headers: {
           "content-type": "application/json",
@@ -24,7 +24,7 @@ const AllBookingList = () => {
   }
 
   const handleBookingDone = (id) => {
-    fetch(`http://localhost:5000/booking-done/${id}`, {
+    fetch(`https://concerned-colt-skirt.cyclic.app/booking-done/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -45,7 +45,7 @@ const AllBookingList = () => {
       });
   };
   const handleBookingOngoing = (id) => {
-    fetch(`http://localhost:5000/booking-ongoing/${id}`, {
+    fetch(`https://concerned-colt-skirt.cyclic.app/booking-ongoing/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -66,7 +66,7 @@ const AllBookingList = () => {
       });
   };
   const handleBookingRemove = (id) => {
-    fetch(`http://localhost:5000/booking-remove/${id}`, {
+    fetch(`https://concerned-colt-skirt.cyclic.app/booking-remove/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -87,7 +87,7 @@ const AllBookingList = () => {
       });
   };
   const handleBookingDelete = (id) => {
-    fetch(`http://localhost:5000/booking/${id}`, {
+    fetch(`https://concerned-colt-skirt.cyclic.app/booking/${id}`, {
       method: "DELETE",
       headers:{
         "content-type":"application/json",

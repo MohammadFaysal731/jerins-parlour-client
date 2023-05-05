@@ -38,7 +38,7 @@ const AddReview = () => {
             description,
           };
           // send the data to mongodb
-          fetch(`http://localhost:5000/reviews`, {
+          fetch(`https://concerned-colt-skirt.cyclic.app/reviews`, {
             method: "POST",
             headers: {
               "content-type": "application/json",

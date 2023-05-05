@@ -9,7 +9,7 @@ const AllUsers = () => {
   const {data:allUsers, isLoading, refetch } = useQuery({
     queryKey: ["allUsers"],
     queryFn: () =>
-      fetch("http://localhost:5000/users",{
+      fetch("https://concerned-colt-skirt.cyclic.app/users",{
         method:"GET",
         headers:{
           "content-type":"application/json",

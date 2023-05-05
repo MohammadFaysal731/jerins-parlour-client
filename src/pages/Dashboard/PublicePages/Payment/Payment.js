@@ -11,7 +11,7 @@ const stripePromise = loadStripe(
 
 const Payment = () => {
   const {id}=useParams()
-  const url = `http://localhost:5000/bookings/${id}`;
+  const url = `https://concerned-colt-skirt.cyclic.app/bookings/${id}`;
   const { data: booking, isLoading } = useQuery({
     queryKey: ["booking", id],
     queryFn: () =>

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../../assets/icons/logo.png";
-import { auth } from "../../../firebase.init";
 import Loading from "../../../components/Loading";
+import { auth } from "../../../firebase.init";
 const MyBooking = () => {
   const [myBooking, setMyBooking] = useState([]);
   const [user] = useAuthState(auth);
@@ -11,7 +11,7 @@ const MyBooking = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const email = user?.email;
-    fetch(`http://localhost:5000/booking?email=${email}`, {
+    fetch(`https://concerned-colt-skirt.cyclic.app/booking?email=${email}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -58,8 +58,9 @@ const MyBooking = () => {
                   {/* Full Name */}
                   <div className="w-full md:my-5">
                     <input
+                      readOnly
                       autoComplete="off"
-                      value={fullName}
+                      defaultValue={fullName}
                       type="text"
                       name="fullName"
                       id="full-name"
@@ -71,7 +72,8 @@ const MyBooking = () => {
                   <div className="w-full md:my-5">
                     <input
                       autoComplete="off"
-                      value={email}
+                      readOnly
+                      defaultValue={email}
                       type="email"
                       name="emailAddress"
                       id="email-address"
@@ -83,7 +85,8 @@ const MyBooking = () => {
                   <div className="w-full md:my-5">
                     <input
                       autoComplete="off"
-                      value={serviceName}
+                      readOnly
+                      defaultValue={serviceName}
                       type="text"
                       name="serviceName"
                       id="service-name"

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import PrimaryButton from '../../components/PrimaryButton';
 import ContactUs from '../ContactUs';
 import Banner from './Banner';
 import ScreenCare from './ScreenCare';
@@ -10,6 +12,11 @@ const Home = () => {
     <div>
       <Banner />
       <Services />
+      <div className="text-center m-5">
+        <PrimaryButton>
+          <Link to="/services">Explore more</Link> 
+        </PrimaryButton>
+      </div>
       <ScreenCare />
       <Testimonials />
       <ContactUs />

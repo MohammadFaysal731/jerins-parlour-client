@@ -37,7 +37,7 @@ const ServiceUpdateModal = ({ updateService, setUpdateService }) => {
             description,
           };
           // send the data to mongodb
-          fetch(`http://localhost:5000/services/${_id}`, {
+          fetch(`https://concerned-colt-skirt.cyclic.app/services/${_id}`, {
             method: "PUT",
             headers: {
               "content-type": "application/json",
