@@ -139,13 +139,17 @@ const Header = () => {
               className="btn btn-square btn-ghost"
             >
               {open ? (
-                <AiOutlineClose className=" w-8 h-8" />
+                <AiOutlineClose
+                  className=" w-8 h-8 "
+                  style={{ color: `${changeColor ? "#FFF8F5" : "black"}` }}
+                />
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   className="inline-block w-8 h-8 stroke-current"
+                  style={{ color: `${changeColor ? "#FFF8F5" : "black"}` }}
                 >
                   <path
                     strokeLinecap="round"

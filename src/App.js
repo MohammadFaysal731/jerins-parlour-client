@@ -1,5 +1,7 @@
 import { Route, Routes } from "react-router-dom";
+import ScrollToTop from "react-scroll-to-top";
 import { ToastContainer } from "react-toastify";
+import MySvg from "./components/MySVG";
 import RequireAdmin from "./components/RequireAdmin";
 import RequireAuth from "./components/RequireAuth";
 import MainLayout from "./layout/MainLayout";
@@ -8,7 +10,6 @@ import { dashboardAdminRoutes } from "./routes/dashboardAdminRoutes";
 import { dashboardPublicRoutes } from "./routes/dashboardPublicRoutes";
 import { privateRoutes } from "./routes/privateRoutes";
 import { publicRoutes } from "./routes/publicRoutes";
-
 function App() {
   return (
     <div className="select-none">
@@ -16,15 +17,11 @@ function App() {
         {/* ManLayout Start */}
         <Route path="/" element={<MainLayout />}>
           {/* public routes */}
-          {publicRoutes?.map(({path,Comment},index) => (
-            <Route
-              path={path}
-              element={<Comment />}
-              key={index}
-            />
+          {publicRoutes?.map(({ path, Comment }, index) => (
+            <Route path={path} element={<Comment />} key={index} />
           ))}
           {/* private routes */}
-          {privateRoutes?.map(({path,Comment},index) => (
+          {privateRoutes?.map(({ path, Comment }, index) => (
             <Route
               path={path}
               element={
@@ -47,7 +44,7 @@ function App() {
           }
         >
           {/* dashboard public rotes */}
-          {dashboardPublicRoutes?.map(({path,Comment},index) => (
+          {dashboardPublicRoutes?.map(({ path, Comment }, index) => (
             <Route
               path={path}
               element={
@@ -59,7 +56,7 @@ function App() {
             />
           ))}
           {/* dashboard admin routes */}
-          {dashboardAdminRoutes?.map(({path,Comment},index) => (
+          {dashboardAdminRoutes?.map(({ path, Comment }, index) => (
             <Route
               path={path}
               element={
@@ -73,6 +70,7 @@ function App() {
         </Route>
         {/* Dashboard  end*/}
       </Routes>
+      <ScrollToTop top={1000} className="rounded-full flex items-center justify-center" smooth component={<MySvg />} />
       <ToastContainer />
     </div>
   );
