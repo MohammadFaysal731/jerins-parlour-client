@@ -7,8 +7,8 @@ import location from "../../assets/icons/footer-icons/location.png";
 import youtube from "../../assets/icons/footer-icons/youtube.png";
 import logo from "../../assets/icons/logo.png";
 const Footer = () => {
-  const today =new Date();
-  const year = today.getFullYear();
+  // const today =new Date();
+  // const year = today.getFullYear();
   return (
     <div className=" p-10 bg-primary text-white">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">

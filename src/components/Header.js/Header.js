@@ -8,12 +8,22 @@ import { auth } from "../../firebase.init";
 import { headerData } from "./HeaderData";
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const [changeColor, setChangeColor] = useState(false);
   const [user] = useAuthState(auth);
   const [signOut] = useSignOut(auth);
   const handleSignOut = () => {
     signOut();
     localStorage.removeItem("accessToken");
   };
+  // change header color on scroll 
+  const handleChangeColor = () => {
+    if (window.scrollY) {
+      setChangeColor(true);
+    } else {
+      setChangeColor(false);
+    }
+  };
+  window.addEventListener("scroll", handleChangeColor);
   const menuItems = (
     <>
       {headerData?.slice(0, 5).map(({ text, path }, index) => (
@@ -21,16 +31,30 @@ const Header = () => {
           className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold"
           key={index}
         >
-          <NavLink
-            to={path}
-            style={({ isActive }) => {
-              return {
-                color: isActive ? "#F63E7B" : "black",
-              };
-            }}
-          >
-            {text}
-          </NavLink>
+          {/*  change header color*/}
+          {changeColor ? (
+            <NavLink
+              to={path}
+              style={({ isActive }) => {
+                return {
+                  color: isActive ? "#FFF8F5" : "black",
+                };
+              }}
+            >
+              {text}
+            </NavLink>
+          ) : (
+            <NavLink
+              to={path}
+              style={({ isActive }) => {
+                return {
+                  color: isActive ? "#F63E7B" : "black",
+                };
+              }}
+            >
+              {text}
+            </NavLink>
+          )}
         </li>
       ))}
       {user && (
@@ -65,7 +89,12 @@ const Header = () => {
             )}
           </li>
           <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
-            <button onClick={handleSignOut} className="hover:text-primary">
+            <button
+              onClick={handleSignOut}
+              className={`${
+                changeColor ? "hover:text-secondary" : "hover:text-primary"
+              } `}
+            >
               Sing out
             </button>
           </li>
@@ -87,7 +116,13 @@ const Header = () => {
     </>
   );
   return (
-    <nav className="bg-secondary sticky top-0 z-10">
+    <nav
+      className={`${
+        changeColor
+          ? "bg-primary transition-all duration-700"
+          : "bg-secondary transition-all duration-700"
+      }  sticky top-0 z-10`}
+    >
       <div className="max-w-7xl mx-auto p-3 pb-0 lg:p-0">
         <div className="flex justify-between items-center">
           {/* navbar logo and mobile navbar icon start */}
