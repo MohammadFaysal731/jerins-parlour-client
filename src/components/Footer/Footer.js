@@ -113,9 +113,6 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <p className="text-sm md:text-lg md:text-center whitespace-nowrap mt-3">
-        All Rights Reserved By Mohammad Faysal CopyRight &copy;{year} .
-      </p>
     </div>
   );
 };
