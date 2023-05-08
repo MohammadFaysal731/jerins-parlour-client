@@ -2,16 +2,15 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { toast } from "react-toastify";
-import PrimaryButton from "../../../components/PrimaryButton";
 import useTitle from "../../../hooks/useTitle";
 const AddService = () => {
-  useTitle("Add Service")
+  useTitle("Add Service");
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors,isSubmitSuccessful },
     reset,
-  } = useForm();
+  } = useForm({ mode: "onChange" });
   const imgbbStoreApiKey = `45c46a1b32a1d6a38d670e42fa5d2349`;
   const onSubmit = (data) => {
     const title = data.title;
@@ -53,7 +52,7 @@ const AddService = () => {
               return res.json();
             })
             .then((result) => {
-              if (result.acknowledged) {
+              if (result.acknowledged > 0) {
                 toast.success(`You will add ${title} service`);
                 reset();
               }
@@ -193,9 +192,17 @@ const AddService = () => {
             </label>
           </div>
         </div>
-        <div className="m-2 text-sm">
-          <PrimaryButton>Add Service</PrimaryButton>
-        </div>
+
+         <input
+          disabled={isSubmitSuccessful}
+          className={`${
+            isSubmitSuccessful
+              ? "text-secondary-focus bg-gray-100 cursor-not-allowed"
+              : "bg-primary text-secondary cursor-pointer "
+          }  px-2 py-1 rounded-lg`}
+          type="submit"
+          value="Add Service"
+        />
       </form>
     </div>
   );

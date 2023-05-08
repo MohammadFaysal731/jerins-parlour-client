@@ -141,7 +141,7 @@ const Header = () => {
               {open ? (
                 <AiOutlineClose
                   className=" w-8 h-8 "
-                  style={{ color: `${changeColor ? "#FFF8F5" : "black"}` }}
+                  style={{ color:'black' }}
                 />
               ) : (
                 <svg
@@ -149,7 +149,7 @@ const Header = () => {
                   fill="none"
                   viewBox="0 0 24 24"
                   className="inline-block w-8 h-8 stroke-current"
-                  style={{ color: `${changeColor ? "#FFF8F5" : "black"}` }}
+                  style={{ color: "black" }}
                 >
                   <path
                     strokeLinecap="round"

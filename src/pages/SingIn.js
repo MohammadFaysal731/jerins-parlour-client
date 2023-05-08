@@ -5,6 +5,7 @@ import {
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import logo from "../assets/icons/logo.png";
 import Loading from "../components/Loading";
 import SocialSignIn from "../components/SocialSignIn";
@@ -24,6 +25,7 @@ const SingIn = () => {
     register,
     formState: { errors },
     handleSubmit,
+    watch,
     reset,
   } = useForm();
   const navigate = useNavigate();
@@ -52,19 +54,18 @@ const SingIn = () => {
     reset();
   };
   
-  
-
-  // const handleForgetPassword = async e => {
-  //   const forgetEmailSend = e.target.emailAddress?.value;
-  //   console.log(forgetEmailSend);
-  //   if (forgetEmailSend) {
-  //    await  sendPasswordResetEmail(forgetEmailSend);
-  //     toast.success("Forget email was send. check your mail");
-  //     reset();
-  //   } else {
-  //     toast.error("Please put your email");
-  //   }
-  // };
+  const handleForgetPassword = async ()=> {
+    const forgetEmailSend = watch("emailAddress");
+    // console.log(forgetEmailSend);
+    if (forgetEmailSend) {
+      await sendPasswordResetEmail(forgetEmailSend);
+      toast(`Forget password email was send on ${forgetEmailSend}`);
+      reset();
+    }
+    else{
+      toast.error(`Please put your email`);
+    }
+  };
 
   return (
     <div className="p-6">
@@ -150,21 +151,19 @@ const SingIn = () => {
               className="cursor-pointer text-sm md:text-lg text-white bg-primary px-8 py-2 rounded-md w-full"
             />
           </form>
-          <div className="flex justify-between items-center">
-            <p className="m-2 text-center text-sm md:text-lg whitespace-nowrap">
+            <p className="m-2 text-center text-sm md:text-lg">
               Don't have an accent ? &nbsp;
               <span className="text-primary underline">
                 <Link to="/sing-up">Create an account</Link>
               </span>
             </p>
-            {/* <button
-              // onClick={handleForgetPassword}
+            <button
+              onClick={handleForgetPassword}
               className="m-2 text-sm md:text-lg whitespace-nowrap text-primary underline"
             >
-              Forget Password
-            </button> */}
+              Forget Password ?
+            </button> 
           </div>
-        </div>
         <SocialSignIn />
       </div>
     </div>
