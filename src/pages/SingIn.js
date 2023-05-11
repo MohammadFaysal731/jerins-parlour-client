@@ -56,14 +56,16 @@ const SingIn = () => {
   
   const handleForgetPassword = async ()=> {
     const forgetEmailSend = watch("emailAddress");
-    // console.log(forgetEmailSend);
+    console.log(forgetEmailSend);
     if (forgetEmailSend) {
-      await sendPasswordResetEmail(forgetEmailSend);
+      const success = await sendPasswordResetEmail(forgetEmailSend);
+      if(success){
       toast(`Forget password email was send on ${forgetEmailSend}`);
-      reset();
-    }
-    else{
-      toast.error(`Please put your email`);
+      reset(); 
+      }
+    } 
+    else {
+      toast.error(`Please enter your email`);
     }
   };
 

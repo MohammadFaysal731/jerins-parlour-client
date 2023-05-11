@@ -7,9 +7,9 @@ const ServiceUpdateModal = ({ updateService, setUpdateService }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors ,isSubmitSuccessful},
     reset,
-  } = useForm();
+  } = useForm({mode:"onChange"});
 
   const imgbbStoreApiKey = `45c46a1b32a1d6a38d670e42fa5d2349`;
   const onSubmit = (data) => {
@@ -212,10 +212,19 @@ const ServiceUpdateModal = ({ updateService, setUpdateService }) => {
               </div>
             </div>
             <div className="modal-action">
-              <button className="btn btn-primary btn-xs">Update</button>
+              <input
+                disabled={isSubmitSuccessful}
+                className={`${
+                  isSubmitSuccessful
+                    ? "text-secondary-focus bg-gray-100 cursor-not-allowed"
+                    : "bg-primary text-secondary cursor-pointer "
+                }  px-2 py-1 rounded-lg btn-xs uppercase`}
+                type="submit"
+                value="Update"
+              />
               <label
                 htmlFor="service-update-modal"
-                className="text-secondary btn btn-primary btn-xs"
+                className="bg-primary text-secondary cursor-pointer btn-xs px-2 py-1 rounded-lg uppercase"
               >
                 Cancel
               </label>

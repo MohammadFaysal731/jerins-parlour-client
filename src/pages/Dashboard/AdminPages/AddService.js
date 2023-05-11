@@ -25,7 +25,12 @@ const AddService = () => {
       method: "POST",
       body: formData,
     })
-      .then((res) => res.json())
+      .then((res) =>{
+        if(res.status !== 200){
+          toast.error(`Error for response status is ${res.status}`)
+        } 
+        return res.json();
+        })
       .then((data) => {
         if (data.success) {
           const image = data.data.url;

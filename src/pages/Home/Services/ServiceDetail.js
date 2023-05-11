@@ -8,14 +8,14 @@ import { auth } from "../../../firebase.init";
 import useTitle from "../../../hooks/useTitle";
 
 const ServiceDetail = () => {
-  useTitle("Service Detail")
+  useTitle("Service Detail");
   const [user] = useAuthState(auth);
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
     handleSubmit,
     reset,
-  } = useForm();
+  } = useForm({ mode: "onChange" });
   const [serviceDetail, setServiceDetail] = useState({});
   const { id } = useParams();
 
@@ -24,20 +24,20 @@ const ServiceDetail = () => {
       method: "GET",
       headers: {
         "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        "authorization": `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
       .then((res) => res.json())
       .then((data) => setServiceDetail(data));
   }, [id]);
 
-  const onSubmit = async (data) => {
-    const fullName = data.fullName;
-    const email = data.emailAddress;
-    const serviceName = data.serviceName;
-    const price = data.price;
-    const image = data.image;
-    const phoneNumber = data.phoneNumber;
+  const onSubmit = (data) => {
+    const fullName = data?.fullName;
+    const email = data?.emailAddress;
+    const serviceName = data?.serviceName;
+    const price = data?.price;
+    const image = data?.image;
+    const phoneNumber = data?.phoneNumber;
     // booking data
     const bookingData = {
       fullName,
@@ -52,7 +52,7 @@ const ServiceDetail = () => {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+       "authorization": `Bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify(bookingData),
     })
@@ -67,6 +67,8 @@ const ServiceDetail = () => {
         if (result.acknowledged > 0) {
           toast.success(`Your ${serviceName} is booked.`);
           reset();
+        } else {
+          toast.error(`Your will already booked ${serviceName} .`);
         }
       });
   };
@@ -101,7 +103,7 @@ const ServiceDetail = () => {
                   message: "Full name is required",
                 },
               })}
-              value={user?.displayName}
+              defaultValue={user?.displayName}
               readOnly
               type="text"
               name="fullName"
@@ -112,12 +114,12 @@ const ServiceDetail = () => {
             <label htmlFor="fullName" className="">
               {errors.fullName?.type === "required" && (
                 <p className="text-red-500">
-                  <small>{errors.fullName.message}</small>
+                  <small>{errors.fullName?.message}</small>
                 </p>
               )}
               {errors.fullName?.type === "maxLength" && (
                 <p className="text-red-500">
-                  <small>{errors.fullName.message}</small>
+                  <small>{errors.fullName?.message}</small>
                 </p>
               )}
             </label>
@@ -131,7 +133,7 @@ const ServiceDetail = () => {
                   message: "Email is required",
                 },
               })}
-              value={user?.email}
+              defaultValue={user?.email}
               readOnly
               type="email"
               name="emailAddress"
@@ -153,7 +155,7 @@ const ServiceDetail = () => {
               {...register("serviceName", {
                 required: true,
               })}
-              value={serviceDetail.title}
+              defaultValue={serviceDetail.title}
               type="text"
               readOnly
               name="serviceName"
@@ -168,7 +170,7 @@ const ServiceDetail = () => {
               {...register("image", {
                 required: true,
               })}
-              value={serviceDetail.image}
+              defaultValue={serviceDetail.image}
               type="text"
               readOnly
               name="image"
@@ -183,7 +185,7 @@ const ServiceDetail = () => {
               {...register("price", {
                 required: true,
               })}
-              value={serviceDetail.price}
+              defaultValue={serviceDetail.price}
               type="number"
               readOnly
               name="price"
@@ -226,9 +228,14 @@ const ServiceDetail = () => {
             </label>
           </div>
           <input
+            disabled={isSubmitSuccessful }
+            className={`${
+              isSubmitSuccessful
+                ? "text-secondary-focus bg-gray-100 cursor-not-allowed"
+                : "bg-primary text-secondary cursor-pointer "
+            }  px-2 py-1 rounded-lg`}
             type="submit"
-            value="Submit"
-            className={` cursor-pointer  text-white bg-primary px-8 py-2 rounded-md `}
+            value="Add Booking"
           />
         </form>
       </div>
