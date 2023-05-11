@@ -101,16 +101,30 @@ const Header = () => {
         </>
       ) : (
         <li className="py-4  lg:mx-4 text-sm lg:text-xl font-semibold">
-          <NavLink
-            to="/sign-in"
-            style={({ isActive }) => {
-              return {
-                color: isActive ? "#F63E7B" : "black",
-              };
-            }}
-          >
-            Sign in
-          </NavLink>
+          {/*  change header color*/}
+          {changeColor ? (
+            <NavLink
+              to="/sign-in"
+              style={({ isActive }) => {
+                return {
+                  color: isActive ? "#FFF8F5" : "black",
+                };
+              }}
+            >
+              Sign in
+            </NavLink>
+          ) : (
+            <NavLink
+              to="/sign-in"
+              style={({ isActive }) => {
+                return {
+                  color: isActive ? "#F63E7B" : "black",
+                };
+              }}
+            >
+              Sign in
+            </NavLink>
+          )}
         </li>
       )}
     </>

@@ -153,15 +153,15 @@ const SingIn = () => {
               className="cursor-pointer text-sm md:text-lg text-white bg-primary px-8 py-2 rounded-md w-full"
             />
           </form>
-            <p className="m-2 text-center text-sm md:text-lg">
+            <span className="text-sm md:text-lg ">
               Don't have an accent ? &nbsp;
-              <span className="text-primary underline">
+              <span className="text-primary underline whitespace-nowrap">
                 <Link to="/sing-up">Create an account</Link>
               </span>
-            </p>
+            </span>
             <button
               onClick={handleForgetPassword}
-              className="m-2 text-sm md:text-lg whitespace-nowrap text-primary underline"
+              className="m-2 text-sm md:text-lg  text-primary underline"
             >
               Forget Password ?
             </button> 

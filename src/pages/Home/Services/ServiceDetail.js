@@ -9,28 +9,27 @@ import useTitle from "../../../hooks/useTitle";
 
 const ServiceDetail = () => {
   useTitle("Service Detail");
-  const [user] = useAuthState(auth);
   const {
     register,
     formState: { errors, isSubmitSuccessful },
     handleSubmit,
     reset,
-  } = useForm({ mode: "onChange" });
-  const [serviceDetail, setServiceDetail] = useState({});
+  } = useForm();
   const { id } = useParams();
+  const [user] = useAuthState(auth);
+  const [serviceDetail, setServiceDetail] = useState({});
 
   useEffect(() => {
     fetch(`https://concerned-colt-skirt.cyclic.app/services/${id}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
-        "authorization": `Bearer ${localStorage.getItem("accessToken")}`,
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
       .then((res) => res.json())
-      .then((data) => setServiceDetail(data));
+      .then((result) => setServiceDetail(result));
   }, [id]);
-
   const onSubmit = (data) => {
     const fullName = data?.fullName;
     const email = data?.emailAddress;
@@ -47,6 +46,7 @@ const ServiceDetail = () => {
       image,
       phoneNumber,
     };
+
     // send the data on mongodb
     fetch(`https://concerned-colt-skirt.cyclic.app/bookings`, {
       method: "POST",
@@ -63,15 +63,16 @@ const ServiceDetail = () => {
         return res.json();
       })
       .then((result) => {
-        // console.log(result);
+        console.log(result);
         if (result.acknowledged > 0) {
           toast.success(`Your ${serviceName} is booked.`);
           reset();
         } else {
           toast.error(`Your will already booked ${serviceName} .`);
         }
-      });
+    });
   };
+
   return (
     <div className="max-w-lg md:max-w-7xl mx-auto p-10">
       <button className="btn-xs btn-primary rounded-md text-secondary">
@@ -97,12 +98,7 @@ const ServiceDetail = () => {
           {/*  Full Name */}
           <div className="w-full my-5 relative group">
             <input
-              {...register("fullName", {
-                required: {
-                  value: true,
-                  message: "Full name is required",
-                },
-              })}
+              {...register("fullName")}
               defaultValue={user?.displayName}
               readOnly
               type="text"
@@ -111,28 +107,11 @@ const ServiceDetail = () => {
               placeholder="Full Name"
               className="w-full h-10 px-4 placeholder-black text-sm peer border-b-2 border-accent outline-none"
             />
-            <label htmlFor="fullName" className="">
-              {errors.fullName?.type === "required" && (
-                <p className="text-red-500">
-                  <small>{errors.fullName?.message}</small>
-                </p>
-              )}
-              {errors.fullName?.type === "maxLength" && (
-                <p className="text-red-500">
-                  <small>{errors.fullName?.message}</small>
-                </p>
-              )}
-            </label>
           </div>
           {/* Email Address */}
           <div className="w-full my-5 relative group">
             <input
-              {...register("emailAddress", {
-                required: {
-                  value: true,
-                  message: "Email is required",
-                },
-              })}
+              {...register("emailAddress")}
               defaultValue={user?.email}
               readOnly
               type="email"
@@ -141,38 +120,34 @@ const ServiceDetail = () => {
               placeholder="Email Address"
               className="w-full h-10 px-4 placeholder-black text-sm peer border-b-2 border-accent outline-none"
             />
-            <label htmlFor="full-name" className="">
-              {errors.emailAddress?.type === "required" && (
-                <p className="text-red-500">
-                  <small>{errors.emailAddress?.message}</small>
-                </p>
-              )}
-            </label>
           </div>
           {/* Service Name */}
           <div className="w-full my-5 relative group">
             <input
               {...register("serviceName", {
-                required: true,
+                required: {
+                  value: true,
+                },
               })}
-              defaultValue={serviceDetail.title}
+              defaultValue={serviceDetail?.title}
               type="text"
-              readOnly
               name="serviceName"
               id="serviceName"
               placeholder="Service Name"
               className="w-full h-10 px-4 placeholder-black text-sm peer border-b-2 border-accent outline-none"
             />
           </div>
-          {/* service image */}
+          {/* Service image */}
           <div className="w-full my-5 relative group">
             <input
               {...register("image", {
-                required: true,
+                required: {
+                  value: true,
+                },
               })}
-              defaultValue={serviceDetail.image}
-              type="text"
+              defaultValue={serviceDetail?.image}
               readOnly
+              type="text"
               name="image"
               id="image"
               placeholder="Service Image"
@@ -183,11 +158,13 @@ const ServiceDetail = () => {
           <div className="w-full my-5 relative group">
             <input
               {...register("price", {
-                required: true,
+                required: {
+                  value: true,
+                },
               })}
-              defaultValue={serviceDetail.price}
-              type="number"
+              defaultValue={serviceDetail?.price}
               readOnly
+              type="number"
               name="price"
               id="price"
               placeholder="Price"
@@ -200,7 +177,7 @@ const ServiceDetail = () => {
               {...register("phoneNumber", {
                 required: {
                   value: true,
-                  message: "Phone umber is required",
+                  message: "Phone number is required",
                 },
 
                 maxLength: {
@@ -228,13 +205,13 @@ const ServiceDetail = () => {
             </label>
           </div>
           <input
-            disabled={isSubmitSuccessful }
+            type="submit"
+            disabled={isSubmitSuccessful}
             className={`${
               isSubmitSuccessful
                 ? "text-secondary-focus bg-gray-100 cursor-not-allowed"
                 : "bg-primary text-secondary cursor-pointer "
             }  px-2 py-1 rounded-lg`}
-            type="submit"
             value="Add Booking"
           />
         </form>

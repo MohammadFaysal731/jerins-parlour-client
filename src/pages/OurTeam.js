@@ -25,8 +25,8 @@ const OurTeam = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {teamMembers?.map(({ _id, name, image }) => (
             <div className="card max-w-lg " key={_id}>
-              <div class="avatar">
-                <div class=" mask mask-hexagon">
+              <div className="avatar">
+                <div className=" mask mask-hexagon">
                   <img src={image} alt={name} className="rounded-xl w-40" />
                 </div>
               </div>
